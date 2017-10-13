@@ -14,10 +14,10 @@
             buildForArchiving = "YES">
             <BuildableReference
                BuildableIdentifier = 'primary'
-               BlueprintIdentifier = '868895ACDBF478DF7DCFAF786D55DE69'
-               BlueprintName = 'SideMenu'
+               BlueprintIdentifier = '21EE228DC0C59DF5EB98F3A15B1717B2'
+               BlueprintName = 'SWTableViewCell'
                ReferencedContainer = 'container:Pods.xcodeproj'
-               BuildableName = 'SideMenu.framework'>
+               BuildableName = 'SWTableViewCell.framework'>
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>

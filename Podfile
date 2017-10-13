@@ -6,5 +6,6 @@ target 'Expense Manager' do
 
   # Pods for Expense Manager
     pod 'SideMenu'
+    pod 'SWTableViewCell'
 
 end
