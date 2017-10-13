@@ -7,8 +7,9 @@
 //
 
 import UIKit
+import SwipeCellKit
 
-class ExpenseCell: UITableViewCell {
+class ExpenseCell: SwipeTableViewCell {
 
     @IBOutlet weak var expenseDescription: UILabel!
     

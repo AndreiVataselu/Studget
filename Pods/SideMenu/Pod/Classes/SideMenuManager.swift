@@ -108,7 +108,7 @@ open class SideMenuManager : NSObject {
     open var menuParallaxStrength: Int = 0
     
     /// Draws the `menuAnimationBackgroundColor` behind the status bar. Default is true.
-    open var menuFadeStatusBar = true
+    open var menuFadeStatusBar = false
     
     /// The animation options when a menu is displayed. Ignored when displayed with a gesture.
     open var menuAnimationOptions: UIViewAnimationOptions = .curveEaseInOut

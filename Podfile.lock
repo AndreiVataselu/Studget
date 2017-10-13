@@ -1,15 +1,25 @@
 PODS:
   - SideMenu (3.1.1)
-  - SWTableViewCell (0.3.7)
+  - SwipeCellKit (2.0.0)
 
 DEPENDENCIES:
   - SideMenu
-  - SWTableViewCell
+  - SwipeCellKit (from `https://github.com/SwipeCellKit/SwipeCellKit.git`, branch `develop`)
+
+EXTERNAL SOURCES:
+  SwipeCellKit:
+    :branch: develop
+    :git: https://github.com/SwipeCellKit/SwipeCellKit.git
+
+CHECKOUT OPTIONS:
+  SwipeCellKit:
+    :commit: 11d86e3864329a970925d985f5273d76b5d74afc
+    :git: https://github.com/SwipeCellKit/SwipeCellKit.git
 
 SPEC CHECKSUMS:
   SideMenu: 1bf32e90afaa2dc0e0ab68e938a0ff85014c4217
-  SWTableViewCell: 2a94aadc9d47b2b611fa064566bf57948b95b579
+  SwipeCellKit: 7db3ff3595609793108b0e7dbc8c6ca7d9dafa8a
 
-PODFILE CHECKSUM: 4d869d1ab35f652c9090a8d73aa196ae0ed5efa4
+PODFILE CHECKSUM: e722bdc5f9d2e25406eaece0f84d5904233b1eca
 
 COCOAPODS: 1.3.1

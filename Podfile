@@ -6,6 +6,6 @@ target 'Expense Manager' do
 
   # Pods for Expense Manager
     pod 'SideMenu'
-    pod 'SWTableViewCell'
+    pod 'SwipeCellKit', :git => 'https://github.com/SwipeCellKit/SwipeCellKit.git', :branch => 'develop'
 
 end

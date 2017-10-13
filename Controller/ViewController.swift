@@ -9,7 +9,7 @@
 import UIKit
 import SideMenu
 import CoreData
-import SWTableViewCell
+import SwipeCellKit
 
 let green = UIColor(red:0.00, green:0.62, blue:0.45, alpha:1.0)
 let red = UIColor(red:0.95, green:0.34, blue:0.34, alpha:1.0)
@@ -159,7 +159,21 @@ extension ViewController {
     
 }
 
-extension ViewController: UITableViewDelegate, UITableViewDataSource {
+extension ViewController: UITableViewDelegate, UITableViewDataSource,SwipeTableViewCellDelegate {
+    
+    func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath, for orientation: SwipeActionsOrientation) -> [SwipeAction]? {
+      guard orientation == .right else { return nil }
+        
+        let deleteAction = SwipeAction(style: .destructive, title: "Sterge") { (action, indexPath) in
+            self.removeCell(atIndexPath: indexPath)
+            self.fetchCoreDataObject()
+            tableView.deleteRows(at: [indexPath], with: .automatic)
+        }
+        deleteAction.backgroundColor = red
+        
+        return [deleteAction]
+    }
+    
     func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
@@ -167,6 +181,7 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "expenseCell") as? ExpenseCell else { return UITableViewCell() }
         let budget = userBudget[indexPath.row]
+        cell.delegate = self
         cell.configureCell(budget: budget)
         return cell
     }
@@ -179,18 +194,18 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
         return UITableViewCellEditingStyle.none
     }
     
-    func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
-        let deleteAction = UITableViewRowAction(style: .destructive, title: "Sterge") { (rowAction, indexPath) in
-            self.removeCell(atIndexPath: indexPath)
-            self.fetchCoreDataObject()
-            tableView.deleteRows(at: [indexPath], with: .automatic)
-        }
-        deleteAction.backgroundColor = red
-        return [deleteAction]
-    }
+//    func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
+////        let deleteAction = UITableViewRowAction(style: .destructive, title: "Sterge") { (rowAction, indexPath) in
+////            self.removeCell(atIndexPath: indexPath)
+////            self.fetchCoreDataObject()
+////            tableView.deleteRows(at: [indexPath], with: .automatic)
+////        }
+////        deleteAction.backgroundColor = red
+////        return [deleteAction]
+//    }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return userBudget.count
     }
-}
 
+}
