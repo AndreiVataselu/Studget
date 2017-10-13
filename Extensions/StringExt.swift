@@ -9,33 +9,6 @@
 import Foundation
 
 extension String {
-    var floatValue: Float {
-        let nf = NumberFormatter()
-        nf.decimalSeparator = "."
-        if let result = nf.number(from: self) {
-            return result.floatValue
-        } else {
-            nf.decimalSeparator = ","
-            if let result = nf.number(from: self) {
-                return result.floatValue
-            }
-        }
-        return 0
-    }
-    
-    var doubleValue:Double {
-        let nf = NumberFormatter()
-        nf.decimalSeparator = "."
-        if let result = nf.number(from: self) {
-            return result.doubleValue
-        } else {
-            nf.decimalSeparator = ","
-            if let result = nf.number(from: self) {
-                return result.doubleValue
-            }
-        }
-        return 0
-}
     
     private static let decimalFormatter:NumberFormatter = {
         let formatter = NumberFormatter()
@@ -64,4 +37,19 @@ extension String {
         
         return false
     }
+    
+    var doubleValue: Double {
+        let nf = NumberFormatter()
+        nf.decimalSeparator = "."
+        if let result = nf.number(from: self) {
+            return result.doubleValue
+        } else {
+            nf.decimalSeparator = ","
+            if let result = nf.number(from: self) {
+                return result.doubleValue
+            }
+        }
+        return 0
+    }
 }
+

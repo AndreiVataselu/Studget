@@ -52,6 +52,8 @@ class ViewController: UIViewController {
                 userBudget.reverse()
                 if userBudget.count >= 1 {
                     print(userBudget.count)
+                    print("userBudgetCount: \(userBudget.count)")
+                    print("userMoneyCount: \(userMoney.count)")
                     userBudgetLabel.text = replaceLabel(number: userMoney[userMoney.count - 1].userMoney)
                     tableView.isHidden = false
                     plusButton.isHidden = false
@@ -151,9 +153,34 @@ extension ViewController {
         
         do {
             try managedContext.save()
-            debugPrint("dai ca merge")
+            debugPrint("removeCell CONTEXT SAVED")
         } catch {
-            debugPrint("nu merge boss \(error.localizedDescription)")
+            debugPrint("removeCell CONTEXT NOT SAVED \(error.localizedDescription)")
+        }
+    }
+    
+    func cancelCell(color: UIColor, atIndexPath indexPath: IndexPath){
+        guard let managedContext = appDelegate?.persistentContainer.viewContext else { return }
+        
+        if color.description == green.description {
+            // scade buget
+            print("\(userMoney[userMoney.count - 1].userMoney) - \((userBudget[indexPath.row].dataSum! as NSString).doubleValue)")
+            print(color)
+            
+            userMoney[userMoney.count - 1].userMoney -= (userBudget[indexPath.row].dataSum! as NSString).doubleValue
+
+        } else {
+            //adauga buget
+            print("\(userMoney[userMoney.count - 1].userMoney) + \((userBudget[indexPath.row].dataSum! as NSString).doubleValue)")
+            print(color)
+            
+            userMoney[userMoney.count - 1].userMoney += (userBudget[indexPath.row].dataSum! as NSString).doubleValue
+        }
+        
+        do {
+            try managedContext.save()
+        } catch {
+            print("cancelCell Managed Context Saving ERROR: \(error.localizedDescription)")
         }
     }
     
@@ -162,7 +189,19 @@ extension ViewController {
 extension ViewController: UITableViewDelegate, UITableViewDataSource,SwipeTableViewCellDelegate {
     
     func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath, for orientation: SwipeActionsOrientation) -> [SwipeAction]? {
-      guard orientation == .right else { return nil }
+      guard orientation == .right else {
+        let cancelAction = SwipeAction(style: .default, title: "Anuleaza"){
+            (action, indexPath)
+            in
+            
+            self.cancelCell(color: userBudget[indexPath.row].dataColor as! UIColor, atIndexPath: indexPath)
+            self.removeCell(atIndexPath: indexPath)
+            self.fetchCoreDataObject()
+            tableView.deleteRows(at: [indexPath], with: .automatic)
+        }
+            cancelAction.backgroundColor = UIColor(red:0.16, green:0.63, blue:0.74, alpha:1.0)
+            return [cancelAction]
+        }
         
         let deleteAction = SwipeAction(style: .destructive, title: "Sterge") { (action, indexPath) in
             self.removeCell(atIndexPath: indexPath)
@@ -193,16 +232,6 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource,SwipeTableV
     func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCellEditingStyle {
         return UITableViewCellEditingStyle.none
     }
-    
-//    func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
-////        let deleteAction = UITableViewRowAction(style: .destructive, title: "Sterge") { (rowAction, indexPath) in
-////            self.removeCell(atIndexPath: indexPath)
-////            self.fetchCoreDataObject()
-////            tableView.deleteRows(at: [indexPath], with: .automatic)
-////        }
-////        deleteAction.backgroundColor = red
-////        return [deleteAction]
-//    }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return userBudget.count

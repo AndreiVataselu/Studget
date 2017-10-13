@@ -36,7 +36,6 @@ class MenuVC: UITableViewController {
     }
 
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        var cellSelected:UITableViewCell = tableView.cellForRow(at: indexPath)!
     }
     
     /*
