@@ -17,9 +17,19 @@ class ExpenseCell: SwipeTableViewCell {
     
     func configureCell(budget: Budget){
         self.expenseDescription.text = budget.dataDescription
-        self.expenseSum.text = budget.dataSum
+        self.expenseSum.text = replaceLabel(number: (budget.dataSum! as NSString).doubleValue)
         self.expenseSum.textColor = budget.dataColor as! UIColor
     }
     
+    func replaceLabel (number: Double) -> String  {
+        
+        let numberFormatter = NumberFormatter()
+        numberFormatter.numberStyle = NumberFormatter.Style.decimal
+        let formattedNumber = numberFormatter.string(from: NSNumber(value:number))
+        
+        return ("\(formattedNumber!) RON")
+        
+    }
     
 }
+

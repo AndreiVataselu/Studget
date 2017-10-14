@@ -76,7 +76,7 @@ class ViewController: UIViewController {
             self.saveMoney(userMoney: (sumTextField.text! as NSString).doubleValue, completion: { (complete) in
                 
             })
-            self.save(sumText: sumTextField.text!, dataDescription: "Buget initial", dataColor: green) {
+            self.save(sumText: sumTextField.text! , dataDescription: "Buget initial", dataColor: green) {
                 complete in
                 if complete {
                     tableView.isHidden = false
@@ -167,6 +167,7 @@ extension ViewController {
             print("\(userMoney[userMoney.count - 1].userMoney) - \((userBudget[indexPath.row].dataSum! as NSString).doubleValue)")
             print(color)
             
+        
             userMoney[userMoney.count - 1].userMoney -= (userBudget[indexPath.row].dataSum! as NSString).doubleValue
 
         } else {

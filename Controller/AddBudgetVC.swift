@@ -50,7 +50,7 @@ class AddBudgetVC: UIViewController {
             userMoney[userMoney.count - 1 ].userMoney += (sumText.text! as NSString).doubleValue
             self.saveMoney(userMoney: userMoney[userMoney.count - 1].userMoney, completion: { (complete) in
             })
-            self.save(sumText: sumText.text!, dataDescription: descriptionCheck, dataColor: green) { complete in
+            self.save(sumText: sumText.text! , dataDescription: descriptionCheck, dataColor: green) { complete in
             if complete {
                 dismiss(animated: true, completion: nil)
             }

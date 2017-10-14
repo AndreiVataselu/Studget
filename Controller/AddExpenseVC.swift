@@ -55,7 +55,7 @@ class AddExpenseVC: UIViewController, UITextFieldDelegate {
             userMoney[userMoney.count-1].userMoney -= (sumFieldDecimal! as NSString).doubleValue
             self.saveMoney(userMoney: userMoney[userMoney.count-1].userMoney, completion: { (complete) in
             })
-            self.save(sumText: sumFieldDecimal!, dataDescription: descriptionCheck, dataColor: red){ complete in
+            self.save(sumText: sumFieldDecimal! , dataDescription: descriptionCheck, dataColor: red){ complete in
             if complete {
                 dismiss(animated: true, completion: nil)
             }
