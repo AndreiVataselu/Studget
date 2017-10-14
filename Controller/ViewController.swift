@@ -164,16 +164,11 @@ extension ViewController {
         
         if color.description == green.description {
             // scade buget
-            print("\(userMoney[userMoney.count - 1].userMoney) - \((userBudget[indexPath.row].dataSum! as NSString).doubleValue)")
-            print(color)
             
-        
             userMoney[userMoney.count - 1].userMoney -= (userBudget[indexPath.row].dataSum! as NSString).doubleValue
 
         } else {
-            //adauga buget
-            print("\(userMoney[userMoney.count - 1].userMoney) + \((userBudget[indexPath.row].dataSum! as NSString).doubleValue)")
-            print(color)
+
             
             userMoney[userMoney.count - 1].userMoney += (userBudget[indexPath.row].dataSum! as NSString).doubleValue
         }

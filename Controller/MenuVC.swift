@@ -5,8 +5,10 @@
 //  Created by Andrei Vataselu on 10/13/17.
 //  Copyright © 2017 Andrei Vataselu. All rights reserved.
 //
-
+import Foundation
 import UIKit
+import CoreData
+
 
 class MenuVC: UITableViewController {
 
@@ -32,65 +34,64 @@ class MenuVC: UITableViewController {
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return 1
+        return 2
     }
 
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+        switch indexPath.row {
+        case 0:
+            deleteBudget()
+            tableView.deselectRow(at: indexPath, animated: false)
+        case 1:
+            print("Calendar")
+
+        default: print("none")
+    
+        }
+        
     }
     
-    /*
-    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath)
-
-        // Configure the cell...
-
-        return cell
+    func deleteBudget(){
+        let sureCheck = UIAlertController(title: "Stergere Buget", message: "Odata cu stergerea bugetului, datele nu mai pot fi recuperate. Apasa Da pentru confirmare.", preferredStyle: .alert)
+        
+        let noAlert = UIAlertAction(title: "Nu", style: .default, handler: nil)
+        let yesAlert = UIAlertAction(title: "Da", style: .default) {
+            action -> Void in
+            
+            guard let managedContext = appDelegate?.persistentContainer.viewContext else { return }
+            
+            let fetchBudget = NSFetchRequest<NSFetchRequestResult>(entityName: "Budget")
+            let fetchMoney = NSFetchRequest<NSFetchRequestResult>(entityName: "UserMoney")
+            let requestDeleteBudget = NSBatchDeleteRequest(fetchRequest: fetchBudget)
+            let requestDeleteMoney = NSBatchDeleteRequest(fetchRequest: fetchMoney)
+            
+            do {
+                try managedContext.execute(requestDeleteBudget)
+                try managedContext.execute(requestDeleteMoney)
+                try managedContext.save()
+            } catch {
+                
+            }
+         
+            let succesDelete = UIAlertController(title: "Buget sters cu succes!", message: nil, preferredStyle: .alert)
+            let okAction = UIAlertAction(title: "OK", style: .default, handler: { (action) in
+                self.dismiss(animated: true, completion: nil)
+            })
+            
+            succesDelete.addAction(okAction)
+            
+            self.present(succesDelete, animated:true, completion: nil)
+            
+        }
+        
+        sureCheck.addAction(yesAlert)
+        sureCheck.addAction(noAlert)
+        
+        present(sureCheck, animated: true, completion: nil)
+        
     }
-    */
-
-    /*
-    // Override to support conditional editing of the table view.
-    override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
-        // Return false if you do not want the specified item to be editable.
-        return true
-    }
-    */
-
-    /*
-    // Override to support editing the table view.
-    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
-        if editingStyle == .delete {
-            // Delete the row from the data source
-            tableView.deleteRows(at: [indexPath], with: .fade)
-        } else if editingStyle == .insert {
-            // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-        }    
-    }
-    */
-
-    /*
-    // Override to support rearranging the table view.
-    override func tableView(_ tableView: UITableView, moveRowAt fromIndexPath: IndexPath, to: IndexPath) {
-
-    }
-    */
-
-    /*
-    // Override to support conditional rearranging of the table view.
-    override func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
-        // Return false if you do not want the item to be re-orderable.
-        return true
-    }
-    */
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
+    
+    
 }
+

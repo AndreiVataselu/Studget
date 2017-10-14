@@ -14,6 +14,7 @@
 		F116F2E21F838B650038F163 /* Expense_Manager.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = F116F2E01F838B650038F163 /* Expense_Manager.xcdatamodeld */; };
 		F116F2E41F838B650038F163 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F116F2E31F838B650038F163 /* Assets.xcassets */; };
 		F116F2E71F838B650038F163 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F116F2E51F838B650038F163 /* LaunchScreen.storyboard */; };
+		F12F9F1B1F928FF500A7F24A /* MenuCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F12F9F1A1F928FF500A7F24A /* MenuCell.swift */; };
 		F130C8F41F8FE673005A4A41 /* StringExt.swift in Sources */ = {isa = PBXBuildFile; fileRef = F130C8F31F8FE673005A4A41 /* StringExt.swift */; };
 		F13131E71F8EA44F00BFCF41 /* NSLayoutConstraintsExt.swift in Sources */ = {isa = PBXBuildFile; fileRef = F13131E61F8EA44F00BFCF41 /* NSLayoutConstraintsExt.swift */; };
 		F1B358381F9015AF00A75B4F /* MenuVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1B358371F9015AF00A75B4F /* MenuVC.swift */; };
@@ -37,6 +38,7 @@
 		F116F2E61F838B650038F163 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		F116F2E81F838B650038F163 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		F116F2EF1F838BAD0038F163 /* ExpenseCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpenseCell.swift; sourceTree = "<group>"; };
+		F12F9F1A1F928FF500A7F24A /* MenuCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuCell.swift; sourceTree = "<group>"; };
 		F130C8F31F8FE673005A4A41 /* StringExt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringExt.swift; sourceTree = "<group>"; };
 		F13131E61F8EA44F00BFCF41 /* NSLayoutConstraintsExt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NSLayoutConstraintsExt.swift; sourceTree = "<group>"; };
 		F1B358371F9015AF00A75B4F /* MenuVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuVC.swift; sourceTree = "<group>"; };
@@ -113,6 +115,7 @@
 			isa = PBXGroup;
 			children = (
 				F116F2EF1F838BAD0038F163 /* ExpenseCell.swift */,
+				F12F9F1A1F928FF500A7F24A /* MenuCell.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -272,6 +275,7 @@
 			files = (
 				F1DE5DBA1F858B8E00D264F5 /* UIViewExt.swift in Sources */,
 				F116F2DC1F838B650038F163 /* ViewController.swift in Sources */,
+				F12F9F1B1F928FF500A7F24A /* MenuCell.swift in Sources */,
 				F1DE5DB31F85705500D264F5 /* AddBudgetVC.swift in Sources */,
 				F1DE5DB81F8575D700D264F5 /* UIViewControllerExt.swift in Sources */,
 				F130C8F41F8FE673005A4A41 /* StringExt.swift in Sources */,
