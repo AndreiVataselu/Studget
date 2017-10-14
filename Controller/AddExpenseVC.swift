@@ -21,6 +21,8 @@ class AddExpenseVC: UIViewController, UITextFieldDelegate {
         self.hideKeyboard()
         self.sumField.delegate = self
         
+        
+        
         if userMoney.count > 0 {
             userBudgetLabel.text = replaceLabel(number: userMoney[userMoney.count - 1].userMoney)
         }
@@ -44,14 +46,16 @@ class AddExpenseVC: UIViewController, UITextFieldDelegate {
             descriptionCheck = "Plata noua"
         }
         
+        let sumFieldDecimal = sumField.text?.replacingOccurrences(of: ",", with: ".", options: .literal, range: nil)
+
         
-        if sumField.text == "" {
+        if sumFieldDecimal == "" {
             sumInvalidAlert()
         } else {
-            userMoney[userMoney.count-1].userMoney -= (sumField.text! as NSString).doubleValue
+            userMoney[userMoney.count-1].userMoney -= (sumFieldDecimal! as NSString).doubleValue
             self.saveMoney(userMoney: userMoney[userMoney.count-1].userMoney, completion: { (complete) in
             })
-            self.save(sumText: sumField.text!, dataDescription: descriptionCheck, dataColor: red){ complete in
+            self.save(sumText: sumFieldDecimal!, dataDescription: descriptionCheck, dataColor: red){ complete in
             if complete {
                 dismiss(animated: true, completion: nil)
             }

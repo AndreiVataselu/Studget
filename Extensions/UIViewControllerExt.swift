@@ -86,11 +86,13 @@ import UIKit
         }
     
     func replaceLabel (number: Double) -> String  {
-        if number.truncatingRemainder(dividingBy: 1) == 0 {
-            return "\(Int(userMoney[userMoney.count - 1].userMoney)) RON"
-        } else {
-            return "\(userMoney[userMoney.count - 1].userMoney) RON"
-        }
+        
+        let numberFormatter = NumberFormatter()
+        numberFormatter.numberStyle = NumberFormatter.Style.decimal
+        let formattedNumber = numberFormatter.string(from: NSNumber(value:number))
+        
+        return ("\(formattedNumber!) RON")
+
     }
 }
     

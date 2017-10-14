@@ -8,6 +8,7 @@
 
 import Foundation
 
+
 extension String {
     
     private static let decimalFormatter:NumberFormatter = {
@@ -15,10 +16,11 @@ extension String {
         formatter.allowsFloats = true
         return formatter
     }()
-    
+
     private var decimalSeparator:String{
         return String.decimalFormatter.decimalSeparator ?? "."
     }
+    
     
     func isValidDecimal(maximumFractionDigits:Int)->Bool{
         
