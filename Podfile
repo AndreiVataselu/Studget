@@ -7,5 +7,5 @@ target 'Expense Manager' do
   # Pods for Expense Manager
     pod 'SideMenu'
     pod 'SwipeCellKit', :git => 'https://github.com/SwipeCellKit/SwipeCellKit.git', :branch => 'develop'
-
+    pod 'JTAppleCalendar', '~> 7.0'
 end
