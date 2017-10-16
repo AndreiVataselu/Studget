@@ -95,10 +95,12 @@
         <scene sceneID="1me-Gv-QRk">
             <objects>
                 <navigationController navigationBarHidden="YES" id="5LI-OS-k7I" customClass="UISideMenuNavigationController" customModule="SideMenu" sceneMemberID="viewController">
-                    <nil key="simulatedTopBarMetrics"/>
                     <modalPageSheetSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="KDi-sO-0gf">
                         <autoresizingMask key="autoresizingMask"/>
+                        <textAttributes key="titleTextAttributes">
+                            <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="17"/>
+                        </textAttributes>
                     </navigationBar>
                     <userDefinedRuntimeAttributes>
                         <userDefinedRuntimeAttribute type="boolean" keyPath="leftSide" value="YES"/>

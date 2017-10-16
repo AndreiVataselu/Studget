@@ -92,8 +92,16 @@ import UIKit
         let formattedNumber = numberFormatter.string(from: NSNumber(value:number))
         
         return ("\(formattedNumber!) RON")
-
     }
+    
+    func formatDate (date: Date) -> String {
+        let dateFormatter = DateFormatter()
+        dateFormatter.locale = Locale(identifier: "ro")
+        dateFormatter.dateFormat = "dd.MM.yyyy"
+        
+        return dateFormatter.string(from: date)
+    }
+    
 }
     
 

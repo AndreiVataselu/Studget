@@ -52,9 +52,6 @@ class ViewController: UIViewController {
             if complete {
                 userBudget.reverse()
                 if userBudget.count >= 1 {
-                    print(userBudget.count)
-                    print("userBudgetCount: \(userBudget.count)")
-                    print("userMoneyCount: \(userMoney.count)")
                     userBudgetLabel.text = replaceLabel(number: userMoney[userMoney.count - 1].userMoney)
                     tableView.isHidden = false
                     plusButton.isHidden = false
