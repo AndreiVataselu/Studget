@@ -266,6 +266,7 @@
                         </connections>
                     </view>
                     <connections>
+                        <outlet property="moreBtn" destination="Yof-bN-Woo" id="OQT-uR-N9b"/>
                         <outlet property="plusButton" destination="sIM-Ju-QoX" id="wg1-Lx-xGA"/>
                         <outlet property="sumTextField" destination="UX1-Ih-JNr" id="nDp-ku-NsO"/>
                         <outlet property="tableView" destination="nnA-rS-fDA" id="UN3-zQ-HgO"/>

@@ -27,6 +27,7 @@ class ViewController: UIViewController {
     @IBOutlet weak var topView: UIView!
     @IBOutlet weak var plusButton: UIButton!
     @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var moreBtn: UIButton!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -57,10 +58,12 @@ class ViewController: UIViewController {
                     userBudgetLabel.text = replaceLabel(number: userMoney[userMoney.count - 1].userMoney)
                     tableView.isHidden = false
                     plusButton.isHidden = false
+                    moreBtn.isHidden = false
                 } else {
                     tableView.isHidden = true
                     userBudgetLabel.text = "Bugetul tau"
                     plusButton.isHidden = true
+                    moreBtn.isHidden = true
                 }
             }
         }
