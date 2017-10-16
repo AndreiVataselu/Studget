@@ -52,6 +52,7 @@ import UIKit
         budget.dataSum = sumText
         budget.dataDescription = dataDescription
         budget.dataColor = dataColor
+        budget.dateSubmitted = formatDate(date: Date())
         
         do{
             try managedContext.save()

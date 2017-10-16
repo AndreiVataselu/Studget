@@ -56,7 +56,7 @@ class MenuVC: UITableViewController {
         let sureCheck = UIAlertController(title: "Stergere Buget", message: "Odata cu stergerea bugetului, datele nu mai pot fi recuperate. Apasa Da pentru confirmare.", preferredStyle: .alert)
         
         let noAlert = UIAlertAction(title: "Nu", style: .default, handler: nil)
-        let yesAlert = UIAlertAction(title: "Da", style: .default) {
+        let yesAlert = UIAlertAction(title: "Da", style: .destructive) {
             action -> Void in
             
             guard let managedContext = appDelegate?.persistentContainer.viewContext else { return }
@@ -85,8 +85,8 @@ class MenuVC: UITableViewController {
             
         }
         
-        sureCheck.addAction(yesAlert)
         sureCheck.addAction(noAlert)
+        sureCheck.addAction(yesAlert)
         
         present(sureCheck, animated: true, completion: nil)
         
