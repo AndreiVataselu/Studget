@@ -66,13 +66,17 @@ class MenuVC: UITableViewController {
             let requestDeleteBudget = NSBatchDeleteRequest(fetchRequest: fetchBudget)
             let requestDeleteMoney = NSBatchDeleteRequest(fetchRequest: fetchMoney)
             
+            
+            
             do {
-                try managedContext.execute(requestDeleteBudget)
+                try managedObjectContext?.execute(requestDeleteBudget)
                 try managedContext.execute(requestDeleteMoney)
                 try managedContext.save()
             } catch {
                 
             }
+            
+            budgetDeleted = true
          
             let succesDelete = UIAlertController(title: "Buget sters cu succes!", message: nil, preferredStyle: .alert)
             let okAction = UIAlertAction(title: "OK", style: .default, handler: { (action) in

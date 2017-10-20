@@ -16,6 +16,7 @@ let red = UIColor(red:0.95, green:0.34, blue:0.34, alpha:1.0)
 let appDelegate = UIApplication.shared.delegate as? AppDelegate
 var userMoney : [UserMoney] = []
 var managedObjectContext: NSManagedObjectContext? = appDelegate?.persistentContainer.viewContext
+var budgetDeleted : Bool = false
 
 
 class ViewController: UIViewController, NSFetchedResultsControllerDelegate {
@@ -53,6 +54,7 @@ class ViewController: UIViewController, NSFetchedResultsControllerDelegate {
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+                
         fetchCoreDataObject()
     }
     
@@ -78,6 +80,11 @@ class ViewController: UIViewController, NSFetchedResultsControllerDelegate {
     
     
     var fetchedResultsController: NSFetchedResultsController<Budget> {
+        if budgetDeleted == true {
+            _fetchedResultsController = nil
+            budgetDeleted = false
+        }
+        
         if _fetchedResultsController != nil {
             return _fetchedResultsController!
         }
