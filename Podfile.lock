@@ -1,5 +1,5 @@
 PODS:
-  - JTAppleCalendar (7.0.6)
+  - JTAppleCalendar (7.1.0)
   - SideMenu (3.1.1)
   - SwipeCellKit (2.0.0)
 
@@ -19,7 +19,7 @@ CHECKOUT OPTIONS:
     :git: https://github.com/SwipeCellKit/SwipeCellKit.git
 
 SPEC CHECKSUMS:
-  JTAppleCalendar: 6a942475e33b9ad4dee0a0e14aa4c63adcf4f543
+  JTAppleCalendar: 60cb4e6de41c8e204fa0e182b98b531debdc9443
   SideMenu: 1bf32e90afaa2dc0e0ab68e938a0ff85014c4217
   SwipeCellKit: 7db3ff3595609793108b0e7dbc8c6ca7d9dafa8a
 

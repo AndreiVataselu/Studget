@@ -18,6 +18,8 @@
 		F130C8F41F8FE673005A4A41 /* StringExt.swift in Sources */ = {isa = PBXBuildFile; fileRef = F130C8F31F8FE673005A4A41 /* StringExt.swift */; };
 		F13131E71F8EA44F00BFCF41 /* NSLayoutConstraintsExt.swift in Sources */ = {isa = PBXBuildFile; fileRef = F13131E61F8EA44F00BFCF41 /* NSLayoutConstraintsExt.swift */; };
 		F1B358381F9015AF00A75B4F /* MenuVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1B358371F9015AF00A75B4F /* MenuVC.swift */; };
+		F1BFF3DD1F9D51AA00D0F8F5 /* CalendarCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1BFF3DC1F9D51AA00D0F8F5 /* CalendarCell.swift */; };
+		F1BFF3E11F9D56B500D0F8F5 /* CalendarVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1BFF3E01F9D56B500D0F8F5 /* CalendarVC.swift */; };
 		F1DE11B81F8CB9FC009B082F /* ExpenseCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F116F2EF1F838BAD0038F163 /* ExpenseCell.swift */; };
 		F1DE5DB31F85705500D264F5 /* AddBudgetVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1DE5DB21F85705500D264F5 /* AddBudgetVC.swift */; };
 		F1DE5DB51F85706300D264F5 /* AddExpenseVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1DE5DB41F85706300D264F5 /* AddExpenseVC.swift */; };
@@ -42,6 +44,8 @@
 		F130C8F31F8FE673005A4A41 /* StringExt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringExt.swift; sourceTree = "<group>"; };
 		F13131E61F8EA44F00BFCF41 /* NSLayoutConstraintsExt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NSLayoutConstraintsExt.swift; sourceTree = "<group>"; };
 		F1B358371F9015AF00A75B4F /* MenuVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuVC.swift; sourceTree = "<group>"; };
+		F1BFF3DC1F9D51AA00D0F8F5 /* CalendarCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarCell.swift; sourceTree = "<group>"; };
+		F1BFF3E01F9D56B500D0F8F5 /* CalendarVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarVC.swift; sourceTree = "<group>"; };
 		F1DE5DB21F85705500D264F5 /* AddBudgetVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddBudgetVC.swift; sourceTree = "<group>"; };
 		F1DE5DB41F85706300D264F5 /* AddExpenseVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddExpenseVC.swift; sourceTree = "<group>"; };
 		F1DE5DB71F8575D700D264F5 /* UIViewControllerExt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewControllerExt.swift; sourceTree = "<group>"; };
@@ -116,6 +120,7 @@
 			children = (
 				F116F2EF1F838BAD0038F163 /* ExpenseCell.swift */,
 				F12F9F1A1F928FF500A7F24A /* MenuCell.swift */,
+				F1BFF3DC1F9D51AA00D0F8F5 /* CalendarCell.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -127,6 +132,7 @@
 				F1DE5DB21F85705500D264F5 /* AddBudgetVC.swift */,
 				F1DE5DB41F85706300D264F5 /* AddExpenseVC.swift */,
 				F1B358371F9015AF00A75B4F /* MenuVC.swift */,
+				F1BFF3E01F9D56B500D0F8F5 /* CalendarVC.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -279,6 +285,7 @@
 				F116F2DC1F838B650038F163 /* ViewController.swift in Sources */,
 				F12F9F1B1F928FF500A7F24A /* MenuCell.swift in Sources */,
 				F1DE5DB31F85705500D264F5 /* AddBudgetVC.swift in Sources */,
+				F1BFF3E11F9D56B500D0F8F5 /* CalendarVC.swift in Sources */,
 				F1DE5DB81F8575D700D264F5 /* UIViewControllerExt.swift in Sources */,
 				F130C8F41F8FE673005A4A41 /* StringExt.swift in Sources */,
 				F13131E71F8EA44F00BFCF41 /* NSLayoutConstraintsExt.swift in Sources */,
@@ -286,6 +293,7 @@
 				F1DE11B81F8CB9FC009B082F /* ExpenseCell.swift in Sources */,
 				F1DE5DB51F85706300D264F5 /* AddExpenseVC.swift in Sources */,
 				F116F2E21F838B650038F163 /* Expense_Manager.xcdatamodeld in Sources */,
+				F1BFF3DD1F9D51AA00D0F8F5 /* CalendarCell.swift in Sources */,
 				F116F2DA1F838B650038F163 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

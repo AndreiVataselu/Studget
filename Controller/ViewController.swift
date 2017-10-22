@@ -10,6 +10,7 @@ import UIKit
 import SideMenu
 import CoreData
 import SwipeCellKit
+import JTAppleCalendar
 
 let green = UIColor(red:0.00, green:0.62, blue:0.45, alpha:1.0)
 let red = UIColor(red:0.95, green:0.34, blue:0.34, alpha:1.0)

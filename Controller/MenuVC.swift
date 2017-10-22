@@ -8,6 +8,7 @@
 import Foundation
 import UIKit
 import CoreData
+import JTAppleCalendar
 
 
 class MenuVC: UITableViewController {
@@ -44,8 +45,9 @@ class MenuVC: UITableViewController {
             deleteBudget()
             tableView.deselectRow(at: indexPath, animated: false)
         case 1:
-            print("Calendar")
-
+           guard let showCalendar =  self.storyboard?.instantiateViewController(withIdentifier: "CalendarVC") else { return }
+            self.presentViewController(showCalendar)
+            
         default: print("none")
     
         }
