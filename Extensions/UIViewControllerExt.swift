@@ -6,6 +6,7 @@
 //  Copyright © 2017 Andrei Vataselu. All rights reserved.
 //
 
+import CoreData
 import UIKit
 
 @objc extension UIViewController {
@@ -46,16 +47,16 @@ import UIKit
     }
     
     func save(sumText: String, dataDescription: String, dataColor: UIColor, completion: (_ finished: Bool) -> ()) {
-        guard let managedContext = appDelegate?.persistentContainer.viewContext else { return }
-        let budget = Budget(context: managedContext)
+        let budget = NSEntityDescription.insertNewObject(forEntityName: "Budget", into: managedObjectContext!) as! Budget
         
         budget.dataSum = sumText
         budget.dataDescription = dataDescription
         budget.dataColor = dataColor
-        budget.dateSubmitted = formatDate(date: Date())
+        budget.dateSubmitted = Date()
+        budget.dateSection = formatDate(date: Date())
         
         do{
-            try managedContext.save()
+            try managedObjectContext?.save()
             print("Succesfully saved data")
             completion(true)
         } catch {
@@ -102,7 +103,6 @@ import UIKit
         
         return dateFormatter.string(from: date)
     }
-    
 }
     
 

@@ -4,13 +4,14 @@
         <attribute name="dataColor" optional="YES" attributeType="Transformable" syncable="YES"/>
         <attribute name="dataDescription" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="dataSum" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="dateSubmitted" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="dateSection" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="dateSubmitted" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
     </entity>
     <entity name="UserMoney" representedClassName="UserMoney" syncable="YES" codeGenerationType="class">
         <attribute name="userMoney" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES" syncable="YES"/>
     </entity>
     <elements>
-        <element name="Budget" positionX="-54" positionY="0" width="128" height="105"/>
+        <element name="Budget" positionX="-54" positionY="0" width="128" height="120"/>
         <element name="UserMoney" positionX="-54" positionY="27" width="128" height="60"/>
     </elements>
 </model>
