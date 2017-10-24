@@ -16,6 +16,7 @@ class CalendarVC: UIViewController {
     @IBOutlet weak var yearLabel : UILabel!
     @IBOutlet weak var headerLabel : UILabel!
     @IBOutlet weak var okButtonOutlet : UIButton!
+    @IBOutlet weak var quickShowView : QuickShowView!
     
     let formatter = DateFormatter()
     var firstDate : Date?
@@ -25,9 +26,10 @@ class CalendarVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupCalendarView()
-        
         let tapMonth = UITapGestureRecognizer(target: self, action: #selector(monthTap))
         let tapYear = UITapGestureRecognizer(target: self, action: #selector(yearTap))
+        
+        quickShowView.alpha = 0
         
         monthLabel.addGestureRecognizer(tapMonth)
         yearLabel.addGestureRecognizer(tapYear)
@@ -65,6 +67,8 @@ class CalendarVC: UIViewController {
         } else {
             validCell.selectedView.isHidden = true
         }
+        
+        
     }
     
     func handleCellTextColor(view: JTAppleCell?, cellState: CellState){
@@ -89,6 +93,53 @@ class CalendarVC: UIViewController {
         self.yearLabel.text = self.formatter.string(from: date)
     }
     
+    func getSectionIndexFromName(name: String) -> Int? {
+        for i in 0..<(_fetchedResultsController?.sections?.count)! {
+            if _fetchedResultsController?.sections![i].name == name {
+                return i
+            }
+        }
+        return nil
+    }
+    
+    func animateQuickShow() {
+        UIView.animate(withDuration: 0.5, animations: {
+            self.quickShowView.alpha = 1.0
+            self.quickShowView.frame.origin.y -= 130
+        })
+    }
+    
+    // - MARK: Quick Budget
+    func showQuickInfoAboutBudget (firstDate:String, endDate:String?=nil) {
+        if let unwrapEndDate = endDate {
+            
+            
+        } else {
+            if let index = getSectionIndexFromName(name: firstDate) {
+                quickShowView.alpha = 0
+            var budgetTotal:Double = 0
+            var expenseTotal:Double = 0
+            for i in 0..<(_fetchedResultsController?.sections![index].numberOfObjects)! {
+                let indexPath = IndexPath(row: i, section: index)
+                let object = (_fetchedResultsController?.object(at: indexPath))!
+                if object.dataColor?.description == red.description {
+                    print("cheltuiala added")
+                    expenseTotal += (object.dataSum! as NSString).doubleValue
+                } else if object.dataColor?.description == green.description {
+                    print("expense added")
+                    budgetTotal += (object.dataSum! as NSString).doubleValue
+                }
+            }
+            
+                quickShowView.totalBudget.text = replaceLabel(number: budgetTotal)
+                quickShowView.totalExpense.text = replaceLabel(number: expenseTotal)
+                
+                animateQuickShow()
+        
+                
+            }
+        }
+    }
     
     
     override func didReceiveMemoryWarning() {
@@ -176,6 +227,8 @@ extension CalendarVC: JTAppleCalendarViewDelegate {
             formatter.dateFormat = "dd.MM.yyyy"
             headerLabel.text = "\(formatter.string(from: date))"
             okButtonOutlet.isHidden = false
+            
+            showQuickInfoAboutBudget(firstDate: formatter.string(from: date))
         }
         
         handleCellSelected(view: cell, cellState: cellState)

@@ -18,7 +18,7 @@ let appDelegate = UIApplication.shared.delegate as? AppDelegate
 var userMoney : [UserMoney] = []
 var managedObjectContext: NSManagedObjectContext? = appDelegate?.persistentContainer.viewContext
 var budgetDeleted : Bool = false
-
+var _fetchedResultsController: NSFetchedResultsController<Budget>? = nil
 
 class ViewController: UIViewController, NSFetchedResultsControllerDelegate {
 
@@ -30,6 +30,7 @@ class ViewController: UIViewController, NSFetchedResultsControllerDelegate {
     @IBOutlet weak var plusButton: UIButton!
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var moreBtn: UIButton!
+
     
     func userBudgetCount(_ section: Int) -> Int{
         return fetchedResultsController.sections![section].numberOfObjects
@@ -44,7 +45,7 @@ class ViewController: UIViewController, NSFetchedResultsControllerDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.hideKeyboard()
-        
+                
         fetchCoreDataObject()
         tableView.delegate = self
         tableView.dataSource = self
@@ -93,7 +94,7 @@ class ViewController: UIViewController, NSFetchedResultsControllerDelegate {
         let fetchRequest = NSFetchRequest<Budget>(entityName: "Budget")
         
         // Set the batch size to a suitable number.
-//        fetchRequest.fetchBatchSize = 20
+        fetchRequest.fetchBatchSize = 20
         
         // Edit the sort key as appropriate.
         let sortDescriptor = NSSortDescriptor(key: "dateSubmitted" , ascending: false)
@@ -122,7 +123,7 @@ class ViewController: UIViewController, NSFetchedResultsControllerDelegate {
         
         return _fetchedResultsController!
     }
-    var _fetchedResultsController: NSFetchedResultsController<Budget>? = nil
+//    var _fetchedResultsController: NSFetchedResultsController<Budget>? = nil
     
     func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>, didChange anObject: Any, at indexPath: IndexPath?, for type: NSFetchedResultsChangeType, newIndexPath: IndexPath?) {
 
