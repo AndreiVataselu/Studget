@@ -102,7 +102,7 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6ap-4v-cZ2" userLabel="TopView">
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="90"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Selecteaza o data" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="18" adjustsFontForContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Z7T-Up-5Zb">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Selecteaza o perioada" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="18" adjustsFontForContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Z7T-Up-5Zb">
                                         <rect key="frame" x="43" y="44" width="328" height="48"/>
                                         <fontDescription key="fontDescription" name="AvenirNext-Bold" family="Avenir Next" pointSize="35"/>
                                         <color key="textColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -301,7 +301,9 @@
                     </view>
                     <connections>
                         <outlet property="calendarView" destination="BIn-Te-a3E" id="vSw-N6-CDL"/>
+                        <outlet property="headerLabel" destination="Z7T-Up-5Zb" id="x5y-i8-wz0"/>
                         <outlet property="monthLabel" destination="mry-0k-g2e" id="Vau-mk-Fzt"/>
+                        <outlet property="okButtonOutlet" destination="q6H-MR-ZIf" id="Qmu-Xq-LQU"/>
                         <outlet property="yearLabel" destination="iy9-Oq-eJi" id="dno-rT-sWW"/>
                     </connections>
                 </viewController>

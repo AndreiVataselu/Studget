@@ -14,8 +14,14 @@ class CalendarVC: UIViewController {
     @IBOutlet weak var calendarView: JTAppleCalendarView!
     @IBOutlet weak var monthLabel : UILabel!
     @IBOutlet weak var yearLabel : UILabel!
+    @IBOutlet weak var headerLabel : UILabel!
+    @IBOutlet weak var okButtonOutlet : UIButton!
     
     let formatter = DateFormatter()
+    var firstDate : Date?
+    var endDate : Date?
+    var dateToDeselect : Date?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         setupCalendarView()
@@ -40,6 +46,8 @@ class CalendarVC: UIViewController {
         calendarView.minimumLineSpacing = 0
         calendarView.minimumInteritemSpacing = 0
         calendarView.allowsMultipleSelection = true
+        calendarView.isRangeSelectionUsed = true
+        
         calendarView.scrollToDate(Date(), animateScroll: false)
 
         
@@ -97,13 +105,16 @@ class CalendarVC: UIViewController {
 
 extension CalendarVC: JTAppleCalendarViewDataSource {
     func calendar(_ calendar: JTAppleCalendarView, willDisplay cell: JTAppleCell, forItemAt date: Date, cellState: CellState, indexPath: IndexPath) {
-//        let cell = cell as! CalendarCell
+
+        handleCellSelected(view: cell, cellState: cellState)
+        handleCellTextColor(view: cell, cellState: cellState)
+    
     }
     
     func configureCalendar(_ calendar: JTAppleCalendarView) -> ConfigurationParameters {
         formatter.dateFormat = "yyyy MM dd"
         formatter.timeZone = Calendar.current.timeZone
-        formatter.locale = Calendar.current.locale
+        formatter.locale = Locale(identifier: "ro")
         
         let startDate = formatter.date(from: "2017 01 01")
         let endDate = formatter.date(from: "2099 12 31")
@@ -128,19 +139,73 @@ extension CalendarVC: JTAppleCalendarViewDelegate {
     
     
     func calendar(_ calendar: JTAppleCalendarView, didSelectDate date: Date, cell: JTAppleCell?, cellState: CellState) {
+
+        
+        if firstDate != nil {
+            if date < firstDate! {
+                 calendarView.selectDates(from: date, to: firstDate!, triggerSelectionDelegate: false, keepSelectionIfMultiSelectionAllowed: true)
+                endDate = firstDate
+                dateToDeselect = date
+                formatter.dateFormat = "dd.MM"
+                headerLabel.text = "\(formatter.string(from: date)) - \(formatter.string(from: firstDate!))"
+                okButtonOutlet.isHidden = false
+                firstDate = nil
+                
+            } else {
+            calendarView.selectDates(from: firstDate!, to: date, triggerSelectionDelegate: false, keepSelectionIfMultiSelectionAllowed: true)
+                
+                formatter.dateFormat = "dd.MM"
+                headerLabel.text = "\(formatter.string(from: firstDate!)) - \(formatter.string(from: date)) "
+                endDate = date
+                dateToDeselect = firstDate
+                firstDate = nil
+                okButtonOutlet.isHidden = false
+            }
+         
+        } else {
+            if endDate != nil {
+            calendarView.deselectDates(from: dateToDeselect!, to: endDate!, triggerSelectionDelegate: false)
+                endDate = nil
+                
+                headerLabel.text = "Selecteaza o perioada"
+                okButtonOutlet.isHidden = true
+            } else {
+                
+            }
+            firstDate = date
+            formatter.dateFormat = "dd.MM.yyyy"
+            headerLabel.text = "\(formatter.string(from: date))"
+            okButtonOutlet.isHidden = false
+        }
+        
         handleCellSelected(view: cell, cellState: cellState)
         handleCellTextColor(view: cell, cellState: cellState)
 
     }
     
     func calendar(_ calendar: JTAppleCalendarView, didDeselectDate date: Date, cell: JTAppleCell?, cellState: CellState) {
-       handleCellSelected(view: cell, cellState: cellState)
-        handleCellTextColor(view: cell, cellState: cellState)
+        
+        if endDate != nil {
+            calendarView.deselectDates(from: dateToDeselect!, to: endDate!, triggerSelectionDelegate: false)
+            endDate = nil
+            firstDate = nil
+            headerLabel.text = "Selecteaza o perioada"
+            okButtonOutlet.isHidden = true
+        } else {
+            firstDate = nil
+        }
+        
+        headerLabel.text = "Selecteaza o perioada"
+        okButtonOutlet.isHidden = true
 
+        handleCellSelected(view: cell, cellState: cellState)
+        handleCellTextColor(view: cell, cellState: cellState)
+        
     }
     
     func calendar(_ calendar: JTAppleCalendarView, didScrollToDateSegmentWith visibleDates: DateSegmentInfo) {
             self.setupCalendarViews(from: visibleDates)
+        
     }
 }
 
