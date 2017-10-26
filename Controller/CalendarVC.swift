@@ -92,8 +92,55 @@ class CalendarVC: UIViewController {
         self.formatter.dateFormat = "yyyy"
         self.yearLabel.text = self.formatter.string(from: date)
     }
+
+    func animateQuickShow() {
+        UIView.animate(withDuration: 0.5, animations: {
+            self.quickShowView.alpha = 1.0
+            self.quickShowView.frame.origin.y = 130
+        })
+    }
     
-    func getSectionIndexFromName(name: String) -> Int? {
+    func dismissQuickShow () {
+        UIView.animate(withDuration: 0.2) {
+            self.quickShowView.alpha = 0
+
+        }
+    }
+    
+    func populateData(firstIndex: Int, lastIndex : Int?=nil){
+        var budgetTotal : Double = 0
+        var expenseTotal : Double = 0
+        
+        if let endIndex = lastIndex {
+        for i in endIndex...firstIndex {
+            for j in 0..<(_fetchedResultsController?.sections![i].numberOfObjects)! {
+                let indexPath = IndexPath(row: j, section: i)
+                let object = (_fetchedResultsController?.object(at: indexPath))!
+                if object.dataColor?.description == red.description {
+                    expenseTotal += (object.dataSum! as NSString).doubleValue
+                } else if object.dataColor?.description == green.description {
+                    budgetTotal += (object.dataSum! as NSString).doubleValue
+                }
+            }
+        }
+        } else {
+            for i in 0..<(_fetchedResultsController?.sections![firstIndex].numberOfObjects)! {
+                let indexPath = IndexPath(row: i, section: firstIndex)
+                let object = (_fetchedResultsController?.object(at: indexPath))!
+                if object.dataColor?.description == red.description {
+                    expenseTotal += (object.dataSum! as NSString).doubleValue
+                } else if object.dataColor?.description == green.description {
+                    budgetTotal += (object.dataSum! as NSString).doubleValue
+                }
+            }
+        }
+        quickShowView.totalBudget.text = replaceLabel(number: budgetTotal)
+        quickShowView.totalExpense.text = replaceLabel(number: expenseTotal)
+        
+        animateQuickShow()
+    }
+    
+    func getSectionIndex (name: String) -> Int? {
         for i in 0..<(_fetchedResultsController?.sections?.count)! {
             if _fetchedResultsController?.sections![i].name == name {
                 return i
@@ -101,42 +148,52 @@ class CalendarVC: UIViewController {
         }
         return nil
     }
+
     
-    func animateQuickShow() {
-        UIView.animate(withDuration: 0.5, animations: {
-            self.quickShowView.alpha = 1.0
-            self.quickShowView.frame.origin.y -= 130
-        })
+    func getFirstIndex (firstDate: String, endDate: String) -> Int? {
+        var unwrapDate = formatter.date(from: firstDate)
+        while unwrapDate! < formatter.date(from: endDate)! {
+            if let firstIndex = getSectionIndex(name: formatter.string(from: unwrapDate!)) {
+                print("firstIndex: \(formatter.string(from: unwrapDate!))")
+                return firstIndex
+            }
+            unwrapDate = Calendar.current.date(byAdding: .day, value: 1, to: unwrapDate!)
+        }
+        return nil
+    }
+    
+    func getLastIndex (firstDate: String, endDate: String) -> Int? {
+        
+        var unwrapDate = formatter.date(from: endDate)
+        while (formatter.date(from: firstDate))! < unwrapDate! {
+            if let lastIndex = getSectionIndex(name: formatter.string(from: unwrapDate!)) {
+                print("lastIndex: \(formatter.string(from: unwrapDate!))")
+                return lastIndex
+            }
+            
+            unwrapDate = Calendar.current.date(byAdding: .day, value: -1, to: unwrapDate!)
+            
+        }
+        return nil
     }
     
     // - MARK: Quick Budget
     func showQuickInfoAboutBudget (firstDate:String, endDate:String?=nil) {
         if let unwrapEndDate = endDate {
-            
-            
-        } else {
-            if let index = getSectionIndexFromName(name: firstDate) {
-                quickShowView.alpha = 0
-            var budgetTotal:Double = 0
-            var expenseTotal:Double = 0
-            for i in 0..<(_fetchedResultsController?.sections![index].numberOfObjects)! {
-                let indexPath = IndexPath(row: i, section: index)
-                let object = (_fetchedResultsController?.object(at: indexPath))!
-                if object.dataColor?.description == red.description {
-                    print("cheltuiala added")
-                    expenseTotal += (object.dataSum! as NSString).doubleValue
-                } else if object.dataColor?.description == green.description {
-                    print("expense added")
-                    budgetTotal += (object.dataSum! as NSString).doubleValue
+            if let firstIndex = getFirstIndex(firstDate: firstDate, endDate: unwrapEndDate) {
+                if let lastIndex = getLastIndex(firstDate: firstDate, endDate: unwrapEndDate) {
+                    populateData(firstIndex: firstIndex, lastIndex: lastIndex)
+                } else {
+                    populateData(firstIndex: firstIndex)
                 }
+            } else if let lastIndex = getLastIndex(firstDate: firstDate, endDate: unwrapEndDate) {
+                populateData(firstIndex: lastIndex)
             }
             
-                quickShowView.totalBudget.text = replaceLabel(number: budgetTotal)
-                quickShowView.totalExpense.text = replaceLabel(number: expenseTotal)
-                
-                animateQuickShow()
-        
-                
+        } else {
+            if let index = getSectionIndex(name: firstDate) {
+                quickShowView.alpha = 0
+                populateData(firstIndex: index)
             }
         }
     }
@@ -200,6 +257,10 @@ extension CalendarVC: JTAppleCalendarViewDelegate {
                 formatter.dateFormat = "dd.MM"
                 headerLabel.text = "\(formatter.string(from: date)) - \(formatter.string(from: firstDate!))"
                 okButtonOutlet.isHidden = false
+                
+                formatter.dateFormat = "dd.MM.yyyy"
+                showQuickInfoAboutBudget(firstDate: formatter.string(from: date), endDate: formatter.string(from: firstDate!) )
+                
                 firstDate = nil
                 
             } else {
@@ -209,20 +270,24 @@ extension CalendarVC: JTAppleCalendarViewDelegate {
                 headerLabel.text = "\(formatter.string(from: firstDate!)) - \(formatter.string(from: date)) "
                 endDate = date
                 dateToDeselect = firstDate
+                
+                formatter.dateFormat = "dd.MM.yyyy"
+                showQuickInfoAboutBudget(firstDate: formatter.string(from: firstDate!), endDate: formatter.string(from: date))
+                
                 firstDate = nil
                 okButtonOutlet.isHidden = false
+
             }
          
         } else {
             if endDate != nil {
             calendarView.deselectDates(from: dateToDeselect!, to: endDate!, triggerSelectionDelegate: false)
                 endDate = nil
-                
+                dismissQuickShow()
                 headerLabel.text = "Selecteaza o perioada"
                 okButtonOutlet.isHidden = true
-            } else {
-                
             }
+            
             firstDate = date
             formatter.dateFormat = "dd.MM.yyyy"
             headerLabel.text = "\(formatter.string(from: date))"
@@ -240,12 +305,14 @@ extension CalendarVC: JTAppleCalendarViewDelegate {
         
         if endDate != nil {
             calendarView.deselectDates(from: dateToDeselect!, to: endDate!, triggerSelectionDelegate: false)
+            dismissQuickShow()
             endDate = nil
             firstDate = nil
             headerLabel.text = "Selecteaza o perioada"
             okButtonOutlet.isHidden = true
         } else {
             firstDate = nil
+            dismissQuickShow()
         }
         
         headerLabel.text = "Selecteaza o perioada"
@@ -261,4 +328,3 @@ extension CalendarVC: JTAppleCalendarViewDelegate {
         
     }
 }
-
