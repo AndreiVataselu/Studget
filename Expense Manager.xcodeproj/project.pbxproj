@@ -14,6 +14,7 @@
 		F116F2E21F838B650038F163 /* Expense_Manager.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = F116F2E01F838B650038F163 /* Expense_Manager.xcdatamodeld */; };
 		F116F2E41F838B650038F163 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F116F2E31F838B650038F163 /* Assets.xcassets */; };
 		F116F2E71F838B650038F163 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F116F2E51F838B650038F163 /* LaunchScreen.storyboard */; };
+		F122771F1FA5F528002BF69D /* PeriodExpenses.swift in Sources */ = {isa = PBXBuildFile; fileRef = F122771E1FA5F528002BF69D /* PeriodExpenses.swift */; };
 		F12F9F1B1F928FF500A7F24A /* MenuCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F12F9F1A1F928FF500A7F24A /* MenuCell.swift */; };
 		F130C8F41F8FE673005A4A41 /* StringExt.swift in Sources */ = {isa = PBXBuildFile; fileRef = F130C8F31F8FE673005A4A41 /* StringExt.swift */; };
 		F13131E71F8EA44F00BFCF41 /* NSLayoutConstraintsExt.swift in Sources */ = {isa = PBXBuildFile; fileRef = F13131E61F8EA44F00BFCF41 /* NSLayoutConstraintsExt.swift */; };
@@ -41,6 +42,7 @@
 		F116F2E61F838B650038F163 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		F116F2E81F838B650038F163 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		F116F2EF1F838BAD0038F163 /* ExpenseCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpenseCell.swift; sourceTree = "<group>"; };
+		F122771E1FA5F528002BF69D /* PeriodExpenses.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PeriodExpenses.swift; sourceTree = "<group>"; };
 		F12F9F1A1F928FF500A7F24A /* MenuCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuCell.swift; sourceTree = "<group>"; };
 		F130C8F31F8FE673005A4A41 /* StringExt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringExt.swift; sourceTree = "<group>"; };
 		F13131E61F8EA44F00BFCF41 /* NSLayoutConstraintsExt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NSLayoutConstraintsExt.swift; sourceTree = "<group>"; };
@@ -136,6 +138,7 @@
 				F1DE5DB41F85706300D264F5 /* AddExpenseVC.swift */,
 				F1B358371F9015AF00A75B4F /* MenuVC.swift */,
 				F1BFF3E01F9D56B500D0F8F5 /* CalendarVC.swift */,
+				F122771E1FA5F528002BF69D /* PeriodExpenses.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -297,6 +300,7 @@
 				F1DE5DB51F85706300D264F5 /* AddExpenseVC.swift in Sources */,
 				F116F2E21F838B650038F163 /* Expense_Manager.xcdatamodeld in Sources */,
 				F1BFF3DD1F9D51AA00D0F8F5 /* CalendarCell.swift in Sources */,
+				F122771F1FA5F528002BF69D /* PeriodExpenses.swift in Sources */,
 				F116F2DA1F838B650038F163 /* AppDelegate.swift in Sources */,
 				F1D52B3A1F9FA1910024EED5 /* QuickShowView.swift in Sources */,
 			);

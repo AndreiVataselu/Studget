@@ -107,6 +107,22 @@ class CalendarVC: UIViewController {
         }
     }
     
+    func dismissQuickShowLabels () {
+        UIView.animate(withDuration: 0.5) {
+          self.quickShowView.budgetLabel.frame.origin.x -=  400
+           self.quickShowView.expenseLabel.frame.origin.x -= 400
+           self.quickShowView.totalBudget.frame.origin.x -= 400
+            self.quickShowView.totalExpense.frame.origin.x -= 400
+        }
+    }
+    
+    func showQuickShowLabels () {
+        self.quickShowView.budgetLabel.frame.origin.x +=  400
+        self.quickShowView.expenseLabel.frame.origin.x += 400
+        self.quickShowView.totalBudget.frame.origin.x += 400
+        self.quickShowView.totalExpense.frame.origin.x += 400
+    }
+    
     func populateData(firstIndex: Int, lastIndex : Int?=nil){
         var budgetTotal : Double = 0
         var expenseTotal : Double = 0
@@ -134,10 +150,17 @@ class CalendarVC: UIViewController {
                 }
             }
         }
-        quickShowView.totalBudget.text = replaceLabel(number: budgetTotal)
-        quickShowView.totalExpense.text = replaceLabel(number: expenseTotal)
-        
-        animateQuickShow()
+           if quickShowView.alpha == 0 {
+            quickShowView.totalBudget.text = replaceLabel(number: budgetTotal)
+            quickShowView.totalExpense.text = replaceLabel(number: expenseTotal)
+
+            animateQuickShow()
+        } else {
+            dismissQuickShowLabels()
+            quickShowView.totalBudget.text = replaceLabel(number: budgetTotal)
+            quickShowView.totalExpense.text = replaceLabel(number: expenseTotal)
+            showQuickShowLabels()
+        }
     }
     
     func getSectionIndex (name: String) -> Int? {
