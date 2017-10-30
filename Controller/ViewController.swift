@@ -84,6 +84,8 @@ class ViewController: UIViewController, NSFetchedResultsControllerDelegate {
     var fetchedResultsController: NSFetchedResultsController<Budget> {
         if budgetDeleted == true {
             _fetchedResultsController = nil
+            NSFetchedResultsController<NSFetchRequestResult>.deleteCache(withName: "cacheRequest")
+            
             budgetDeleted = false
         }
         
@@ -105,7 +107,7 @@ class ViewController: UIViewController, NSFetchedResultsControllerDelegate {
         // nil for section name key path means "no sections".
     
     
-        let aFetchedResultsController = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: managedObjectContext!, sectionNameKeyPath: "dateSection", cacheName: nil)
+        let aFetchedResultsController = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: managedObjectContext!, sectionNameKeyPath: "dateSection", cacheName: "cacheRequest")
     
         aFetchedResultsController.delegate = self
         _fetchedResultsController = aFetchedResultsController
@@ -125,11 +127,14 @@ class ViewController: UIViewController, NSFetchedResultsControllerDelegate {
     }
 //    var _fetchedResultsController: NSFetchedResultsController<Budget>? = nil
     
-    func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>, didChange anObject: Any, at indexPath: IndexPath?, for type: NSFetchedResultsChangeType, newIndexPath: IndexPath?) {
-
+//    func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>, didChange anObject: Any, at indexPath: IndexPath?, for type: NSFetchedResultsChangeType, newIndexPath: IndexPath?) {
+//
+//        tableView.reloadData()
+//    }
+    
+    func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
         tableView.reloadData()
     }
-    
     
 
     override func didReceiveMemoryWarning() {

@@ -67,7 +67,7 @@ class MenuVC: UITableViewController {
             let fetchMoney = NSFetchRequest<NSFetchRequestResult>(entityName: "UserMoney")
             let requestDeleteBudget = NSBatchDeleteRequest(fetchRequest: fetchBudget)
             let requestDeleteMoney = NSBatchDeleteRequest(fetchRequest: fetchMoney)
-            
+
             
             
             do {
@@ -86,7 +86,6 @@ class MenuVC: UITableViewController {
             })
             
             succesDelete.addAction(okAction)
-            
             self.present(succesDelete, animated:true, completion: nil)
             
         }

@@ -9,6 +9,10 @@
 import UIKit
 import JTAppleCalendar
 
+var periodString : String = ""
+var date1 = Date()
+var date2 = Date()
+
 class CalendarVC: UIViewController {
 
     @IBOutlet weak var calendarView: JTAppleCalendarView!
@@ -17,6 +21,7 @@ class CalendarVC: UIViewController {
     @IBOutlet weak var headerLabel : UILabel!
     @IBOutlet weak var okButtonOutlet : UIButton!
     @IBOutlet weak var quickShowView : QuickShowView!
+    var objectExistanceSwitch : Bool = false
     
     let formatter = DateFormatter()
     var firstDate : Date?
@@ -41,7 +46,7 @@ class CalendarVC: UIViewController {
     }
     
     @objc func yearTap (gestureRecognizer: UITapGestureRecognizer){
-        print("year")
+        
     }
     
     func setupCalendarView(){
@@ -166,6 +171,8 @@ class CalendarVC: UIViewController {
     func getSectionIndex (name: String) -> Int? {
         for i in 0..<(_fetchedResultsController?.sections?.count)! {
             if _fetchedResultsController?.sections![i].name == name {
+                objectExistanceSwitch = true
+                print(objectExistanceSwitch)
                 return i
             }
         }
@@ -178,11 +185,14 @@ class CalendarVC: UIViewController {
         while unwrapDate! < formatter.date(from: endDate)! {
             if let firstIndex = getSectionIndex(name: formatter.string(from: unwrapDate!)) {
                 print("firstIndex: \(formatter.string(from: unwrapDate!))")
+                objectExistanceSwitch = true
+                print(objectExistanceSwitch)
+
                 return firstIndex
             }
             unwrapDate = Calendar.current.date(byAdding: .day, value: 1, to: unwrapDate!)
         }
-        return nil
+            return nil
     }
     
     func getLastIndex (firstDate: String, endDate: String) -> Int? {
@@ -191,6 +201,9 @@ class CalendarVC: UIViewController {
         while (formatter.date(from: firstDate))! < unwrapDate! {
             if let lastIndex = getSectionIndex(name: formatter.string(from: unwrapDate!)) {
                 print("lastIndex: \(formatter.string(from: unwrapDate!))")
+                objectExistanceSwitch = true
+                print(objectExistanceSwitch)
+                
                 return lastIndex
             }
             
@@ -206,17 +219,35 @@ class CalendarVC: UIViewController {
             if let firstIndex = getFirstIndex(firstDate: firstDate, endDate: unwrapEndDate) {
                 if let lastIndex = getLastIndex(firstDate: firstDate, endDate: unwrapEndDate) {
                     populateData(firstIndex: firstIndex, lastIndex: lastIndex)
+                    date1 = formatter.date(from: firstDate)! + 7200
+                    date2 = formatter.date(from: unwrapEndDate)! + 93599
+                    print("date1: \(date1) | date2: \(date2)")
                 } else {
                     populateData(firstIndex: firstIndex)
+                    date1 = formatter.date(from: firstDate)! + 7200
+                    date2 = formatter.date(from: firstDate)! + 93599
+                    print("date1: \(date1) | date2: \(date2)")
+
+
                 }
             } else if let lastIndex = getLastIndex(firstDate: firstDate, endDate: unwrapEndDate) {
                 populateData(firstIndex: lastIndex)
+                date1 = formatter.date(from: unwrapEndDate)! + 7200
+                date2 = formatter.date(from: unwrapEndDate)! + 93599
+                print("date1: \(date1) | date2: \(date2)")
+
+
             }
             
         } else {
             if let index = getSectionIndex(name: firstDate) {
                 quickShowView.alpha = 0
                 populateData(firstIndex: index)
+                date1 = formatter.date(from: firstDate)! + 7200
+                date2 = formatter.date(from: firstDate)! + 93599
+                print("date1: \(date1 + 7200) | date2: \(date2 + 93599)")
+
+
             }
         }
     }
@@ -232,6 +263,21 @@ class CalendarVC: UIViewController {
         dismissViewController()
     }
     
+    @IBAction func okButtonPressed(_ sender: Any) {
+        
+        if objectExistanceSwitch{
+        periodString = headerLabel.text!
+        guard let showPeriodVC = self.storyboard?.instantiateViewController(withIdentifier: "PeriodExpenses") else { return }
+        presentViewController(showPeriodVC)
+        } else {
+            let noObjectAlert = UIAlertController(title: "Nicio intrare gasita pentru data aleasa", message: nil, preferredStyle: .alert)
+            let okAction = UIAlertAction(title: "OK", style: .default, handler: nil)
+            noObjectAlert.addAction(okAction)
+            
+            present(noObjectAlert, animated: true, completion: nil)
+        }
+        
+    }
 }
 
 extension CalendarVC: JTAppleCalendarViewDataSource {
@@ -309,6 +355,8 @@ extension CalendarVC: JTAppleCalendarViewDelegate {
                 dismissQuickShow()
                 headerLabel.text = "Selecteaza o perioada"
                 okButtonOutlet.isHidden = true
+                objectExistanceSwitch = false
+                print(objectExistanceSwitch)
             }
             
             firstDate = date
@@ -333,6 +381,8 @@ extension CalendarVC: JTAppleCalendarViewDelegate {
             firstDate = nil
             headerLabel.text = "Selecteaza o perioada"
             okButtonOutlet.isHidden = true
+            objectExistanceSwitch = false
+            print(objectExistanceSwitch)
         } else {
             firstDate = nil
             dismissQuickShow()

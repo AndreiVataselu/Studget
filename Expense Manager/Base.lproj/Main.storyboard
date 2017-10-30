@@ -121,6 +121,9 @@
                                             <constraint firstAttribute="width" constant="25" id="fjw-MM-Wy7"/>
                                         </constraints>
                                         <state key="normal" image="success"/>
+                                        <connections>
+                                            <action selector="okButtonPressed:" destination="X7a-PU-uFG" eventType="touchUpInside" id="nDJ-kq-mK7"/>
+                                        </connections>
                                     </button>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Selecteaza o perioada" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="18" adjustsFontForContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Z7T-Up-5Zb">
                                         <rect key="frame" x="38" y="33" width="338" height="38.333333333333343"/>
@@ -388,7 +391,7 @@
         <!--Period Expenses-->
         <scene sceneID="ji4-GK-GL5">
             <objects>
-                <viewController id="i4z-Co-fLP" customClass="PeriodExpenses" customModule="Expense_Manager" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="PeriodExpenses" id="i4z-Co-fLP" customClass="PeriodExpenses" customModule="Expense_Manager" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Xgt-KK-Dgs">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -405,6 +408,7 @@
                                         <state key="normal" image="back"/>
                                         <connections>
                                             <action selector="backBtnPressed:" destination="X7a-PU-uFG" eventType="touchUpInside" id="1jI-Iv-iXq"/>
+                                            <action selector="backButtonPressed:" destination="i4z-Co-fLP" eventType="touchUpInside" id="wNw-6l-VVy"/>
                                         </connections>
                                     </button>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Perioada" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="18" adjustsFontForContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="NAz-sz-SJN">
@@ -428,7 +432,7 @@
                                 <rect key="frame" x="0.0" y="67" width="414" height="669"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" textLabel="cas-Lp-tCv" detailTextLabel="fge-f1-qDY" style="IBUITableViewCellStyleValue1" id="or0-mA-yDg" customClass="ExpenseCell" customModule="Expense_Manager" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="periodCell" textLabel="cas-Lp-tCv" detailTextLabel="fge-f1-qDY" style="IBUITableViewCellStyleValue1" id="or0-mA-yDg" customClass="ExpenseCell" customModule="Expense_Manager" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="28" width="414" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="or0-mA-yDg" id="GgW-9I-VzP">
@@ -451,8 +455,16 @@
                                                 </label>
                                             </subviews>
                                         </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="expenseDescription" destination="cas-Lp-tCv" id="upk-yb-Rkd"/>
+                                            <outlet property="expenseSum" destination="fge-f1-qDY" id="kKv-Ps-EX8"/>
+                                        </connections>
                                     </tableViewCell>
                                 </prototypes>
+                                <connections>
+                                    <outlet property="dataSource" destination="i4z-Co-fLP" id="Ayx-e8-M2S"/>
+                                    <outlet property="delegate" destination="i4z-Co-fLP" id="88O-4j-HYC"/>
+                                </connections>
                             </tableView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -467,6 +479,10 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="NjY-JA-I9v"/>
                     </view>
+                    <connections>
+                        <outlet property="periodLabel" destination="NAz-sz-SJN" id="t7h-Rm-a6u"/>
+                        <outlet property="tableView" destination="4Ks-ND-icL" id="qj0-IX-trl"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="pJk-uZ-lna" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

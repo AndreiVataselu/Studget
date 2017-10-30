@@ -13,7 +13,6 @@
 		F116F2DF1F838B650038F163 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F116F2DD1F838B650038F163 /* Main.storyboard */; };
 		F116F2E21F838B650038F163 /* Expense_Manager.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = F116F2E01F838B650038F163 /* Expense_Manager.xcdatamodeld */; };
 		F116F2E41F838B650038F163 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F116F2E31F838B650038F163 /* Assets.xcassets */; };
-		F116F2E71F838B650038F163 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F116F2E51F838B650038F163 /* LaunchScreen.storyboard */; };
 		F122771F1FA5F528002BF69D /* PeriodExpenses.swift in Sources */ = {isa = PBXBuildFile; fileRef = F122771E1FA5F528002BF69D /* PeriodExpenses.swift */; };
 		F12F9F1B1F928FF500A7F24A /* MenuCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F12F9F1A1F928FF500A7F24A /* MenuCell.swift */; };
 		F130C8F41F8FE673005A4A41 /* StringExt.swift in Sources */ = {isa = PBXBuildFile; fileRef = F130C8F31F8FE673005A4A41 /* StringExt.swift */; };
@@ -39,7 +38,6 @@
 		F116F2DE1F838B650038F163 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		F116F2E11F838B650038F163 /* Expense_Manager.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Expense_Manager.xcdatamodel; sourceTree = "<group>"; };
 		F116F2E31F838B650038F163 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		F116F2E61F838B650038F163 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		F116F2E81F838B650038F163 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		F116F2EF1F838BAD0038F163 /* ExpenseCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpenseCell.swift; sourceTree = "<group>"; };
 		F122771E1FA5F528002BF69D /* PeriodExpenses.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PeriodExpenses.swift; sourceTree = "<group>"; };
@@ -112,7 +110,6 @@
 				F116F2D91F838B650038F163 /* AppDelegate.swift */,
 				F116F2DD1F838B650038F163 /* Main.storyboard */,
 				F116F2E31F838B650038F163 /* Assets.xcassets */,
-				F116F2E51F838B650038F163 /* LaunchScreen.storyboard */,
 				F116F2E81F838B650038F163 /* Info.plist */,
 				F116F2E01F838B650038F163 /* Expense_Manager.xcdatamodeld */,
 			);
@@ -216,7 +213,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F116F2E71F838B650038F163 /* LaunchScreen.storyboard in Resources */,
 				F116F2E41F838B650038F163 /* Assets.xcassets in Resources */,
 				F116F2DF1F838B650038F163 /* Main.storyboard in Resources */,
 			);
@@ -315,14 +311,6 @@
 				F116F2DE1F838B650038F163 /* Base */,
 			);
 			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
-		F116F2E51F838B650038F163 /* LaunchScreen.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				F116F2E61F838B650038F163 /* Base */,
-			);
-			name = LaunchScreen.storyboard;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
@@ -440,6 +428,7 @@
 			baseConfigurationReference = EBE4CE9C21461DEB007DE8EB /* Pods-Expense Manager.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = KVZCD8H3X4;
 				INFOPLIST_FILE = "Expense Manager/Info.plist";
@@ -456,6 +445,7 @@
 			baseConfigurationReference = A20A650E30C7BD62824D3579 /* Pods-Expense Manager.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = KVZCD8H3X4;
 				INFOPLIST_FILE = "Expense Manager/Info.plist";
