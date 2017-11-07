@@ -11,6 +11,7 @@ import SideMenu
 import CoreData
 import SwipeCellKit
 import JTAppleCalendar
+import GoogleMobileAds
 
 let green = UIColor(red:0.00, green:0.62, blue:0.45, alpha:1.0)
 let red = UIColor(red:0.95, green:0.34, blue:0.34, alpha:1.0)
@@ -20,7 +21,7 @@ var managedObjectContext: NSManagedObjectContext? = appDelegate?.persistentConta
 var budgetDeleted : Bool = false
 var _fetchedResultsController: NSFetchedResultsController<Budget>? = nil
 
-class ViewController: UIViewController, NSFetchedResultsControllerDelegate {
+class ViewController: UIViewController, NSFetchedResultsControllerDelegate,GADBannerViewDelegate {
 
     
     @IBOutlet weak var sumTextField: UITextField!
@@ -30,7 +31,9 @@ class ViewController: UIViewController, NSFetchedResultsControllerDelegate {
     @IBOutlet weak var plusButton: UIButton!
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var moreBtn: UIButton!
+    @IBOutlet weak var bannerView : GADBannerView!
 
+    @IBOutlet weak var tableViewBottomConstraint: NSLayoutConstraint!
     
     func userBudgetCount(_ section: Int) -> Int{
         return fetchedResultsController.sections![section].numberOfObjects
@@ -45,13 +48,27 @@ class ViewController: UIViewController, NSFetchedResultsControllerDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.hideKeyboard()
-                
+        
         fetchCoreDataObject()
         tableView.delegate = self
         tableView.dataSource = self
         self.tableView.tableFooterView = UIView()
         
-
+        bannerView.adSize = kGADAdSizeSmartBannerPortrait
+        
+        bannerView.adUnitID = "ca-app-pub-3588787712275306/6954370602"
+        bannerView.rootViewController = self
+        bannerView.delegate = self
+        bannerView.load(GADRequest())
+        
+    }
+    
+    func adViewDidReceiveAd(_ bannerView: GADBannerView) {
+        tableViewBottomConstraint.constant -= 50
+    }
+    
+    func adView(_ bannerView: GADBannerView, didFailToReceiveAdWithError error: GADRequestError) {
+        tableViewBottomConstraint.constant = 0
     }
     
     override func viewDidAppear(_ animated: Bool) {

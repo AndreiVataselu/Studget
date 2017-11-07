@@ -8,4 +8,9 @@ target 'Expense Manager' do
     pod 'SideMenu'
     pod 'SwipeCellKit', :git => 'https://github.com/SwipeCellKit/SwipeCellKit.git', :branch => 'develop'
     pod 'JTAppleCalendar', '~> 7.0'
+    pod 'Google-Mobile-Ads-SDK'
+    pod 'Firebase/Core'
+
+
+
 end

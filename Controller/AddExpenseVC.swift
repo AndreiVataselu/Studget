@@ -30,8 +30,8 @@ class AddExpenseVC: UIViewController, UITextFieldDelegate {
         addBtn.translatesAutoresizingMaskIntoConstraints = true
         addBtn.bindToKeyboard()
         
-        let swipeRecognizer = UISwipeGestureRecognizer(target: self, action: #selector(dismissViewController))
-        swipeRecognizer.direction = UISwipeGestureRecognizerDirection.right
+        let swipeRecognizer = UIScreenEdgePanGestureRecognizer(target: self, action: #selector(dismissViewController))
+        swipeRecognizer.edges = .left
         self.view.addGestureRecognizer(swipeRecognizer)
     }
     

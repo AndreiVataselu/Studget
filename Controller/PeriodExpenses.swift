@@ -8,12 +8,16 @@
 
 import UIKit
 import CoreData
+import GoogleMobileAds
 
-class PeriodExpenses: UIViewController, NSFetchedResultsControllerDelegate{
+
+class PeriodExpenses: UIViewController, NSFetchedResultsControllerDelegate, GADBannerViewDelegate{
 
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var periodLabel: UILabel!
-    
+    @IBOutlet var bannerView: GADBannerView!
+
+    @IBOutlet weak var tableViewBottomConstraint: NSLayoutConstraint!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -21,12 +25,35 @@ class PeriodExpenses: UIViewController, NSFetchedResultsControllerDelegate{
         tableView.delegate = self
         tableView.dataSource = self
         periodLabel.text = periodString
+        bannerView.adSize = kGADAdSizeSmartBannerPortrait
+
+        bannerView.adUnitID = "ca-app-pub-3588787712275306/8074266186"
+        bannerView.rootViewController = self
+        bannerView.delegate = self
+        bannerView.load(GADRequest())
+
         
+        let swipeRecognizer = UIScreenEdgePanGestureRecognizer(target: self, action: #selector(dismissViewController))
+        swipeRecognizer.edges = .left
+        self.view.addGestureRecognizer(swipeRecognizer)
         // Do any additional setup after loading the view.
+    }
+    
+    func adViewDidReceiveAd(_ bannerView: GADBannerView) {
+        tableViewBottomConstraint.constant -= 50
+    }
+    
+    func adView(_ bannerView: GADBannerView, didFailToReceiveAdWithError error: GADRequestError) {
+        tableViewBottomConstraint.constant = 0
     }
 
         
         var fetchedResultsController: NSFetchedResultsController<Budget> {
+            
+            _fetchedResultsController = nil
+            NSFetchedResultsController<NSFetchRequestResult>.deleteCache(withName: "cachePeriod")
+
+            
              let predicate = NSPredicate(format: "(dateSubmitted >= %@) AND (dateSubmitted <= %@)", date1 as NSDate, date2 as NSDate)
             
             let fetchRequest = NSFetchRequest<Budget>(entityName: "Budget")
@@ -37,14 +64,14 @@ class PeriodExpenses: UIViewController, NSFetchedResultsControllerDelegate{
             // Edit the sort key as appropriate.
             let sortDescriptor = NSSortDescriptor(key: "dateSubmitted" , ascending: false)
             
-            fetchRequest.sortDescriptors = [sortDescriptor]
             fetchRequest.predicate = predicate
-            
+            fetchRequest.sortDescriptors = [sortDescriptor]
+           
             // Edit the section name key path and cache name if appropriate.
             // nil for section name key path means "no sections".
             
             
-            let aFetchedResultsController = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: managedObjectContext!, sectionNameKeyPath: "dateSection", cacheName: "cacheRequest")
+            let aFetchedResultsController = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: managedObjectContext!, sectionNameKeyPath: "dateSection", cacheName: "cachePeriod")
             
             aFetchedResultsController.delegate = self
             _fetchedResultsController = aFetchedResultsController
@@ -81,14 +108,18 @@ extension PeriodExpenses : UITableViewDelegate, UITableViewDataSource {
     }
 
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        return fetchedResultsController.sections![section].name
+        if let object = fetchedResultsController.object(at: IndexPath(row: 0, section: section)) as? Budget {
+            return object.dateSection
+        } else {
+            return nil
+        }
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "periodCell") as! ExpenseCell
         let budget = fetchedResultsController.object(at: indexPath)
         cell.configureCell(budget: budget)
-        print("CELL DESC: \((cell.expenseDescription)!) | DATE: \((budget.dateSubmitted)!)")
+        cell.selectionStyle = .none
         
         return cell
     }

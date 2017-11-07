@@ -39,6 +39,10 @@ class CalendarVC: UIViewController {
         monthLabel.addGestureRecognizer(tapMonth)
         yearLabel.addGestureRecognizer(tapYear)
         // Do any additional setup after loading the view.
+        
+        let swipeRecognizer = UIScreenEdgePanGestureRecognizer(target: self, action: #selector(dismissViewController))
+        swipeRecognizer.edges = .left
+        self.view.addGestureRecognizer(swipeRecognizer)
     }
 
     @objc func monthTap (gestureRecognizer: UITapGestureRecognizer){
@@ -67,7 +71,7 @@ class CalendarVC: UIViewController {
     
     func handleCellSelected(view: JTAppleCell?, cellState: CellState) {
         guard let validCell = view as? CalendarCell else {return}
-        if validCell.isSelected {
+        if cellState.isSelected {
             validCell.selectedView.isHidden = false
         } else {
             validCell.selectedView.isHidden = true
@@ -78,7 +82,7 @@ class CalendarVC: UIViewController {
     
     func handleCellTextColor(view: JTAppleCell?, cellState: CellState){
         guard let validCell = view as? CalendarCell else {return}
-        if validCell.isSelected {
+        if cellState.isSelected {
             validCell.dateLabel.textColor = UIColor.white
         } else {
             if cellState.dateBelongsTo == .thisMonth {
@@ -219,35 +223,18 @@ class CalendarVC: UIViewController {
             if let firstIndex = getFirstIndex(firstDate: firstDate, endDate: unwrapEndDate) {
                 if let lastIndex = getLastIndex(firstDate: firstDate, endDate: unwrapEndDate) {
                     populateData(firstIndex: firstIndex, lastIndex: lastIndex)
-                    date1 = formatter.date(from: firstDate)! + 7200
-                    date2 = formatter.date(from: unwrapEndDate)! + 93599
-                    print("date1: \(date1) | date2: \(date2)")
                 } else {
                     populateData(firstIndex: firstIndex)
-                    date1 = formatter.date(from: firstDate)! + 7200
-                    date2 = formatter.date(from: firstDate)! + 93599
-                    print("date1: \(date1) | date2: \(date2)")
-
 
                 }
             } else if let lastIndex = getLastIndex(firstDate: firstDate, endDate: unwrapEndDate) {
                 populateData(firstIndex: lastIndex)
-                date1 = formatter.date(from: unwrapEndDate)! + 7200
-                date2 = formatter.date(from: unwrapEndDate)! + 93599
-                print("date1: \(date1) | date2: \(date2)")
-
-
             }
             
         } else {
             if let index = getSectionIndex(name: firstDate) {
                 quickShowView.alpha = 0
                 populateData(firstIndex: index)
-                date1 = formatter.date(from: firstDate)! + 7200
-                date2 = formatter.date(from: firstDate)! + 93599
-                print("date1: \(date1 + 7200) | date2: \(date2 + 93599)")
-
-
             }
         }
     }
@@ -317,12 +304,24 @@ extension CalendarVC: JTAppleCalendarViewDelegate {
     
     func calendar(_ calendar: JTAppleCalendarView, didSelectDate date: Date, cell: JTAppleCell?, cellState: CellState) {
 
+        date1 = date
+        date2 = date + 86399
+        
+        let testFormatter = DateFormatter()
+        testFormatter.dateFormat = "dd.MM | HH:mm"
+        print("DATE1: \(testFormatter.string(from: date1)) | DATE2: \(testFormatter.string(from: date2))")
         
         if firstDate != nil {
             if date < firstDate! {
                  calendarView.selectDates(from: date, to: firstDate!, triggerSelectionDelegate: false, keepSelectionIfMultiSelectionAllowed: true)
                 endDate = firstDate
                 dateToDeselect = date
+                date2 = endDate! + 86399
+                date1 = date
+                
+                        print("DATE1: \(testFormatter.string(from: date1)) | DATE2: \(testFormatter.string(from: date2))")
+                
+                
                 formatter.dateFormat = "dd.MM"
                 headerLabel.text = "\(formatter.string(from: date)) - \(formatter.string(from: firstDate!))"
                 okButtonOutlet.isHidden = false
@@ -334,6 +333,12 @@ extension CalendarVC: JTAppleCalendarViewDelegate {
                 
             } else {
             calendarView.selectDates(from: firstDate!, to: date, triggerSelectionDelegate: false, keepSelectionIfMultiSelectionAllowed: true)
+                
+                date1 = firstDate! 
+                date2 = date + 86399
+                
+                        print("DATE1: \(testFormatter.string(from: date1)) | DATE2: \(testFormatter.string(from: date2))")
+                
                 
                 formatter.dateFormat = "dd.MM"
                 headerLabel.text = "\(formatter.string(from: firstDate!)) - \(formatter.string(from: date)) "
@@ -356,7 +361,6 @@ extension CalendarVC: JTAppleCalendarViewDelegate {
                 headerLabel.text = "Selecteaza o perioada"
                 okButtonOutlet.isHidden = true
                 objectExistanceSwitch = false
-                print(objectExistanceSwitch)
             }
             
             firstDate = date
