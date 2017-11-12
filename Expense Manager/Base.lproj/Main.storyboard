@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="UCH-iz-yXR">
     <device id="retina5_5" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
+        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13527"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
@@ -679,6 +680,7 @@
                             <outletCollection property="gestureRecognizers" destination="UHr-go-bpN" appends="YES" id="87d-J4-j9m"/>
                         </connections>
                     </view>
+                    <navigationItem key="navigationItem" id="XfS-TQ-6Bh"/>
                     <connections>
                         <outlet property="bannerView" destination="HVb-yO-Dfk" id="ZzL-oO-aaE"/>
                         <outlet property="moreBtn" destination="Yof-bN-Woo" id="OQT-uR-N9b"/>
@@ -770,7 +772,7 @@
                             <constraint firstItem="5BF-Xc-iF8" firstAttribute="top" secondItem="oLJ-CV-njw" secondAttribute="bottom" constant="8" identifier="descriereSus" id="09e-9z-yzn"/>
                             <constraint firstItem="oLJ-CV-njw" firstAttribute="top" secondItem="4G3-9t-g5T" secondAttribute="bottom" constant="8" identifier="sumaSUS" id="0Y6-FP-v0f"/>
                             <constraint firstItem="waH-aw-Bla" firstAttribute="trailing" secondItem="4G3-9t-g5T" secondAttribute="trailing" constant="26" id="2LR-I8-9ZR"/>
-                            <constraint firstItem="AaI-xR-noe" firstAttribute="trailing" secondItem="waH-aw-Bla" secondAttribute="trailing" priority="999" identifier="rightTrailAdd" id="698-Ep-dLw"/>
+                            <constraint firstItem="AaI-xR-noe" firstAttribute="trailing" secondItem="waH-aw-Bla" secondAttribute="trailing" identifier="rightTrailAdd" id="698-Ep-dLw"/>
                             <constraint firstItem="kLE-2d-2gH" firstAttribute="trailing" secondItem="waH-aw-Bla" secondAttribute="trailing" id="85U-UN-kag"/>
                             <constraint firstItem="waH-aw-Bla" firstAttribute="trailing" secondItem="oLJ-CV-njw" secondAttribute="trailing" constant="20" identifier="sumaDreapta" id="B3d-AC-OOR"/>
                             <constraint firstItem="kLE-2d-2gH" firstAttribute="top" secondItem="TZO-eo-HiX" secondAttribute="top" identifier="viewTop" id="D5l-96-j9t"/>
@@ -780,14 +782,16 @@
                             <constraint firstItem="AaI-xR-noe" firstAttribute="leading" secondItem="waH-aw-Bla" secondAttribute="leading" identifier="leftTrailAdd" id="XLB-Nd-yVu"/>
                             <constraint firstItem="kLE-2d-2gH" firstAttribute="leading" secondItem="waH-aw-Bla" secondAttribute="leading" id="aCO-x3-eCV"/>
                             <constraint firstItem="waH-aw-Bla" firstAttribute="trailing" secondItem="5BF-Xc-iF8" secondAttribute="trailing" constant="20" identifier="descriereDreapta" id="bpf-aR-kCZ"/>
-                            <constraint firstItem="AaI-xR-noe" firstAttribute="bottom" secondItem="waH-aw-Bla" secondAttribute="bottom" priority="999" identifier="bottomTrailAdd" id="gth-Ax-PoU"/>
                             <constraint firstItem="5BF-Xc-iF8" firstAttribute="leading" secondItem="waH-aw-Bla" secondAttribute="leading" constant="20" identifier="descriereStanga" id="j1m-QC-K5P"/>
                             <constraint firstItem="4G3-9t-g5T" firstAttribute="leading" secondItem="waH-aw-Bla" secondAttribute="leading" constant="26" id="jBc-vC-IiP"/>
+                            <constraint firstItem="AaI-xR-noe" firstAttribute="bottom" secondItem="waH-aw-Bla" secondAttribute="bottom" id="xtx-5R-ope"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="waH-aw-Bla"/>
                     </view>
+                    <navigationItem key="navigationItem" id="PtU-y2-xW0"/>
                     <connections>
                         <outlet property="addBtn" destination="AaI-xR-noe" id="mVa-U4-8Wv"/>
+                        <outlet property="bottomConstraint" destination="xtx-5R-ope" id="4JL-Rg-hqy"/>
                         <outlet property="descriptionText" destination="5BF-Xc-iF8" id="ZaV-De-cVv"/>
                         <outlet property="sumText" destination="oLJ-CV-njw" id="KYO-aF-rs9"/>
                         <outlet property="userBudgetLabel" destination="2hv-iT-YCC" id="y8m-68-BKq"/>
@@ -795,7 +799,22 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="5sr-GM-A6V" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="711" y="161"/>
+            <point key="canvasLocation" x="710.14492753623199" y="160.59782608695653"/>
+        </scene>
+        <!--First Navigation-->
+        <scene sceneID="t0k-nx-0Tq">
+            <objects>
+                <navigationController navigationBarHidden="YES" id="UCH-iz-yXR" customClass="FirstNavigation" customModule="Expense_Manager" customModuleProvider="target" sceneMemberID="viewController">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="gzH-Ps-DBS">
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="BYZ-38-t0r" kind="relationship" relationship="rootViewController" id="JNW-YW-Kzq"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="fr3-Fk-Kt0" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-107" y="-834"/>
         </scene>
         <!--Add ExpenseVC-->
         <scene sceneID="kRJ-TY-4mm">
@@ -870,7 +889,7 @@
                         <constraints>
                             <constraint firstItem="nZx-6d-qcL" firstAttribute="trailing" secondItem="SLu-wt-RQC" secondAttribute="trailing" constant="20" id="65C-rY-dBd"/>
                             <constraint firstItem="SLu-wt-RQC" firstAttribute="top" secondItem="Gos-hZ-E3a" secondAttribute="bottom" constant="8" id="8K9-bd-kva"/>
-                            <constraint firstItem="pm6-8n-65h" firstAttribute="trailing" secondItem="nZx-6d-qcL" secondAttribute="trailing" priority="999" identifier="rightTrailExpense" id="DaC-Kw-3sI"/>
+                            <constraint firstItem="pm6-8n-65h" firstAttribute="trailing" secondItem="nZx-6d-qcL" secondAttribute="trailing" identifier="rightTrailExpense" id="DaC-Kw-3sI"/>
                             <constraint firstItem="pm6-8n-65h" firstAttribute="leading" secondItem="nZx-6d-qcL" secondAttribute="leading" identifier="leftTrailExpense" id="Glw-H5-ZoE"/>
                             <constraint firstItem="Gos-hZ-E3a" firstAttribute="leading" secondItem="nZx-6d-qcL" secondAttribute="leading" constant="20" id="MEB-ja-7Sn"/>
                             <constraint firstItem="Gos-hZ-E3a" firstAttribute="top" secondItem="EfV-Yp-xbp" secondAttribute="bottom" constant="8" id="WF0-Rg-nqB"/>
@@ -879,15 +898,17 @@
                             <constraint firstItem="x2n-vi-6Jb" firstAttribute="top" secondItem="HKS-45-Cfq" secondAttribute="top" id="rfB-zi-GgS"/>
                             <constraint firstItem="EfV-Yp-xbp" firstAttribute="leading" secondItem="nZx-6d-qcL" secondAttribute="leading" constant="26" id="s2i-QF-XCt"/>
                             <constraint firstItem="nZx-6d-qcL" firstAttribute="trailing" secondItem="Gos-hZ-E3a" secondAttribute="trailing" constant="20" id="wdB-yK-j3n"/>
-                            <constraint firstItem="pm6-8n-65h" firstAttribute="bottom" secondItem="nZx-6d-qcL" secondAttribute="bottom" priority="999" identifier="bottomTrailExpense" id="wf5-gs-O9z"/>
+                            <constraint firstItem="pm6-8n-65h" firstAttribute="bottom" secondItem="nZx-6d-qcL" secondAttribute="bottom" identifier="bottomTrailExpense" id="wf5-gs-O9z"/>
                             <constraint firstItem="nZx-6d-qcL" firstAttribute="trailing" secondItem="EfV-Yp-xbp" secondAttribute="trailing" constant="26" id="xd0-Ql-Rsk"/>
                             <constraint firstItem="x2n-vi-6Jb" firstAttribute="leading" secondItem="nZx-6d-qcL" secondAttribute="leading" id="yAt-1z-xLl"/>
                             <constraint firstItem="EfV-Yp-xbp" firstAttribute="top" secondItem="x2n-vi-6Jb" secondAttribute="bottom" constant="22" id="yBy-k8-Opt"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="nZx-6d-qcL"/>
                     </view>
+                    <navigationItem key="navigationItem" id="9IO-He-SBf"/>
                     <connections>
                         <outlet property="addBtn" destination="pm6-8n-65h" id="haI-Ie-biT"/>
+                        <outlet property="bottomConstraint" destination="wf5-gs-O9z" id="DA3-nz-896"/>
                         <outlet property="descriptionField" destination="SLu-wt-RQC" id="syT-BL-Bp3"/>
                         <outlet property="sumField" destination="Gos-hZ-E3a" id="y2d-mD-xB2"/>
                         <outlet property="userBudgetLabel" destination="NtV-Tu-8nW" id="gw1-7g-CJY"/>

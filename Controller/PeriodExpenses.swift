@@ -10,6 +10,26 @@ import UIKit
 import CoreData
 import GoogleMobileAds
 
+fileprivate func < <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
+    switch (lhs, rhs) {
+    case let (l?, r?):
+        return l < r
+    case (nil, _?):
+        return true
+    default:
+        return false
+    }
+}
+
+fileprivate func > <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
+    switch (lhs, rhs) {
+    case let (l?, r?):
+        return l > r
+    default:
+        return rhs < lhs
+    }
+}
+
 
 class PeriodExpenses: UIViewController, NSFetchedResultsControllerDelegate, GADBannerViewDelegate{
 
@@ -17,6 +37,9 @@ class PeriodExpenses: UIViewController, NSFetchedResultsControllerDelegate, GADB
     @IBOutlet weak var periodLabel: UILabel!
     @IBOutlet var bannerView: GADBannerView!
 
+    var percentDrivenInteractiveTransition: UIPercentDrivenInteractiveTransition!
+    var panGestureRecognizer: UIPanGestureRecognizer!
+    
     @IBOutlet weak var tableViewBottomConstraint: NSLayoutConstraint!
     
     override func viewDidLoad() {
@@ -33,10 +56,52 @@ class PeriodExpenses: UIViewController, NSFetchedResultsControllerDelegate, GADB
         bannerView.load(GADRequest())
 
         
-        let swipeRecognizer = UIScreenEdgePanGestureRecognizer(target: self, action: #selector(dismissViewController))
-        swipeRecognizer.edges = .left
-        self.view.addGestureRecognizer(swipeRecognizer)
-        // Do any additional setup after loading the view.
+        addGesture()
+
+    }
+    
+    func addGesture() {
+        
+        guard navigationController?.viewControllers.count > 1 else {
+            return
+        }
+        
+        
+        panGestureRecognizer = UIPanGestureRecognizer(target: self, action: #selector(PeriodExpenses.handlePanGesture(_:)))
+        self.view.addGestureRecognizer(panGestureRecognizer)
+    }
+    
+    @objc func handlePanGesture(_ panGesture: UIPanGestureRecognizer) {
+        
+        let percent = max(panGesture.translation(in: view).x, 0) / view.frame.width
+        
+        switch panGesture.state {
+            
+        case .began:
+            navigationController?.delegate = self
+            _ = navigationController?.popViewController(animated: true)
+            
+        case .changed:
+            if let percentDrivenInteractiveTransition = percentDrivenInteractiveTransition {
+                percentDrivenInteractiveTransition.update(percent)
+            }
+            
+        case .ended:
+            let velocity = panGesture.velocity(in: view).x
+            
+            // Continue if drag more than 50% of screen width or velocity is higher than 1000
+            if percent > 0.5 || velocity > 1000 {
+                percentDrivenInteractiveTransition.finish()
+            } else {
+                percentDrivenInteractiveTransition.cancel()
+            }
+            
+        case .cancelled, .failed:
+            percentDrivenInteractiveTransition.cancel()
+            
+        default:
+            break
+        }
     }
     
     func adViewDidReceiveAd(_ bannerView: GADBannerView) {
@@ -71,7 +136,7 @@ class PeriodExpenses: UIViewController, NSFetchedResultsControllerDelegate, GADB
             // nil for section name key path means "no sections".
             
             
-            let aFetchedResultsController = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: managedObjectContext!, sectionNameKeyPath: "dateSection", cacheName: "cachePeriod")
+            let aFetchedResultsController = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: managedObjectContext!, sectionNameKeyPath: "dateSection", cacheName: nil)
             
             aFetchedResultsController.delegate = self
             _fetchedResultsController = aFetchedResultsController
@@ -98,7 +163,7 @@ class PeriodExpenses: UIViewController, NSFetchedResultsControllerDelegate, GADB
     }
     
     @IBAction func backButtonPressed(_ sender: Any) {
-        dismissViewController()
+        navigationController?.popViewController(animated: true)
     }
 }
 
@@ -131,6 +196,28 @@ extension PeriodExpenses : UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
         return true
     }
+
+}
+
+extension PeriodExpenses: UINavigationControllerDelegate {
     
+    func navigationController(_ navigationController: UINavigationController, animationControllerFor operation: UINavigationControllerOperation, from fromVC: UIViewController, to toVC: UIViewController) -> UIViewControllerAnimatedTransitioning? {
+        
+        return SlideAnimatedTransitioning()
+    }
+    
+    func navigationController(_ navigationController: UINavigationController, interactionControllerFor animationController: UIViewControllerAnimatedTransitioning) -> UIViewControllerInteractiveTransitioning? {
+        
+        navigationController.delegate = nil
+        
+        if panGestureRecognizer.state == .began {
+            percentDrivenInteractiveTransition = UIPercentDrivenInteractiveTransition()
+            percentDrivenInteractiveTransition.completionCurve = .easeOut
+        } else {
+            percentDrivenInteractiveTransition = nil
+        }
+        
+        return percentDrivenInteractiveTransition
+    }
 }
 

@@ -46,7 +46,9 @@ class MenuVC: UITableViewController {
             tableView.deselectRow(at: indexPath, animated: false)
         case 1:
            guard let showCalendar =  self.storyboard?.instantiateViewController(withIdentifier: "CalendarVC") else { return }
-            self.presentViewController(showCalendar)
+           if let navigator = self.navigationController {
+            navigator.pushViewController(showCalendar, animated: true)
+            }
             
         default: print("none")
     

@@ -8,12 +8,15 @@
 
 /* Begin PBXBuildFile section */
 		C74519155535D98244B0262D /* Pods_Expense_Manager.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D5B85DA89DEF01E6C448876D /* Pods_Expense_Manager.framework */; };
+		F108A7E31FB3AB37000649BC /* SwipeInteractionController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F108A7E21FB3AB37000649BC /* SwipeInteractionController.swift */; };
 		F116F2DA1F838B650038F163 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F116F2D91F838B650038F163 /* AppDelegate.swift */; };
 		F116F2DC1F838B650038F163 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F116F2DB1F838B650038F163 /* ViewController.swift */; };
 		F116F2DF1F838B650038F163 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F116F2DD1F838B650038F163 /* Main.storyboard */; };
 		F116F2E21F838B650038F163 /* Expense_Manager.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = F116F2E01F838B650038F163 /* Expense_Manager.xcdatamodeld */; };
 		F116F2E41F838B650038F163 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F116F2E31F838B650038F163 /* Assets.xcassets */; };
 		F122771F1FA5F528002BF69D /* PeriodExpenses.swift in Sources */ = {isa = PBXBuildFile; fileRef = F122771E1FA5F528002BF69D /* PeriodExpenses.swift */; };
+		F12CE5181FB3B49200247F87 /* SlideAnimatedTransitioning.swift in Sources */ = {isa = PBXBuildFile; fileRef = F12CE5171FB3B49200247F87 /* SlideAnimatedTransitioning.swift */; };
+		F12CE51A1FB3B86D00247F87 /* FirstNavigation.swift in Sources */ = {isa = PBXBuildFile; fileRef = F12CE5191FB3B86D00247F87 /* FirstNavigation.swift */; };
 		F12F9F1B1F928FF500A7F24A /* MenuCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F12F9F1A1F928FF500A7F24A /* MenuCell.swift */; };
 		F130C8F41F8FE673005A4A41 /* StringExt.swift in Sources */ = {isa = PBXBuildFile; fileRef = F130C8F31F8FE673005A4A41 /* StringExt.swift */; };
 		F13131E71F8EA44F00BFCF41 /* NSLayoutConstraintsExt.swift in Sources */ = {isa = PBXBuildFile; fileRef = F13131E61F8EA44F00BFCF41 /* NSLayoutConstraintsExt.swift */; };
@@ -33,6 +36,8 @@
 		A20A650E30C7BD62824D3579 /* Pods-Expense Manager.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Expense Manager.release.xcconfig"; path = "Pods/Target Support Files/Pods-Expense Manager/Pods-Expense Manager.release.xcconfig"; sourceTree = "<group>"; };
 		D5B85DA89DEF01E6C448876D /* Pods_Expense_Manager.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Expense_Manager.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		EBE4CE9C21461DEB007DE8EB /* Pods-Expense Manager.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Expense Manager.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Expense Manager/Pods-Expense Manager.debug.xcconfig"; sourceTree = "<group>"; };
+		F108A7E21FB3AB37000649BC /* SwipeInteractionController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwipeInteractionController.swift; sourceTree = "<group>"; };
+		F10B34361FB5E90C0075BD85 /* Expense Manager.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "Expense Manager.entitlements"; sourceTree = "<group>"; };
 		F116F2D61F838B640038F163 /* Expense Manager.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Expense Manager.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		F116F2D91F838B650038F163 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		F116F2DB1F838B650038F163 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -42,6 +47,8 @@
 		F116F2E81F838B650038F163 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		F116F2EF1F838BAD0038F163 /* ExpenseCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpenseCell.swift; sourceTree = "<group>"; };
 		F122771E1FA5F528002BF69D /* PeriodExpenses.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PeriodExpenses.swift; sourceTree = "<group>"; };
+		F12CE5171FB3B49200247F87 /* SlideAnimatedTransitioning.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SlideAnimatedTransitioning.swift; sourceTree = "<group>"; };
+		F12CE5191FB3B86D00247F87 /* FirstNavigation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstNavigation.swift; sourceTree = "<group>"; };
 		F12F9F1A1F928FF500A7F24A /* MenuCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuCell.swift; sourceTree = "<group>"; };
 		F130C8F31F8FE673005A4A41 /* StringExt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringExt.swift; sourceTree = "<group>"; };
 		F13131E61F8EA44F00BFCF41 /* NSLayoutConstraintsExt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NSLayoutConstraintsExt.swift; sourceTree = "<group>"; };
@@ -110,12 +117,15 @@
 		F116F2D81F838B640038F163 /* Expense Manager */ = {
 			isa = PBXGroup;
 			children = (
+				F10B34361FB5E90C0075BD85 /* Expense Manager.entitlements */,
+				F12CE5171FB3B49200247F87 /* SlideAnimatedTransitioning.swift */,
 				F116F2D91F838B650038F163 /* AppDelegate.swift */,
 				F116F2DD1F838B650038F163 /* Main.storyboard */,
 				F116F2E31F838B650038F163 /* Assets.xcassets */,
 				F1DECC411FA79D9900B9AE7B /* GoogleService-Info.plist */,
 				F116F2E81F838B650038F163 /* Info.plist */,
 				F116F2E01F838B650038F163 /* Expense_Manager.xcdatamodeld */,
+				F108A7E21FB3AB37000649BC /* SwipeInteractionController.swift */,
 			);
 			path = "Expense Manager";
 			sourceTree = "<group>";
@@ -147,6 +157,7 @@
 				F1B358371F9015AF00A75B4F /* MenuVC.swift */,
 				F1BFF3E01F9D56B500D0F8F5 /* CalendarVC.swift */,
 				F122771E1FA5F528002BF69D /* PeriodExpenses.swift */,
+				F12CE5191FB3B86D00247F87 /* FirstNavigation.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -198,6 +209,20 @@
 					F116F2D51F838B640038F163 = {
 						CreatedOnToolsVersion = 9.0;
 						ProvisioningStyle = Automatic;
+						SystemCapabilities = {
+							com.apple.GameCenter = {
+								enabled = 0;
+							};
+							com.apple.HealthKit = {
+								enabled = 0;
+							};
+							com.apple.InAppPurchase = {
+								enabled = 0;
+							};
+							com.apple.iCloud = {
+								enabled = 0;
+							};
+						};
 					};
 				};
 			};
@@ -300,12 +325,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				F1DE5DBA1F858B8E00D264F5 /* UIViewExt.swift in Sources */,
+				F108A7E31FB3AB37000649BC /* SwipeInteractionController.swift in Sources */,
 				F116F2DC1F838B650038F163 /* ViewController.swift in Sources */,
 				F12F9F1B1F928FF500A7F24A /* MenuCell.swift in Sources */,
 				F1DE5DB31F85705500D264F5 /* AddBudgetVC.swift in Sources */,
 				F1BFF3E11F9D56B500D0F8F5 /* CalendarVC.swift in Sources */,
 				F1DE5DB81F8575D700D264F5 /* UIViewControllerExt.swift in Sources */,
 				F130C8F41F8FE673005A4A41 /* StringExt.swift in Sources */,
+				F12CE5181FB3B49200247F87 /* SlideAnimatedTransitioning.swift in Sources */,
 				F13131E71F8EA44F00BFCF41 /* NSLayoutConstraintsExt.swift in Sources */,
 				F1B358381F9015AF00A75B4F /* MenuVC.swift in Sources */,
 				F1DE11B81F8CB9FC009B082F /* ExpenseCell.swift in Sources */,
@@ -315,6 +342,7 @@
 				F122771F1FA5F528002BF69D /* PeriodExpenses.swift in Sources */,
 				F116F2DA1F838B650038F163 /* AppDelegate.swift in Sources */,
 				F1D52B3A1F9FA1910024EED5 /* QuickShowView.swift in Sources */,
+				F12CE51A1FB3B86D00247F87 /* FirstNavigation.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -380,7 +408,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -431,7 +459,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
@@ -447,10 +475,10 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = XX8HA2FTR6;
+				DEVELOPMENT_TEAM = KVZCD8H3X4;
 				INFOPLIST_FILE = "Expense Manager/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.andreivataselu.Studget;
+				PRODUCT_BUNDLE_IDENTIFIER = com.andreivataselu.StudgetApp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 4.0;
@@ -466,10 +494,10 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = XX8HA2FTR6;
+				DEVELOPMENT_TEAM = KVZCD8H3X4;
 				INFOPLIST_FILE = "Expense Manager/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.andreivataselu.Studget;
+				PRODUCT_BUNDLE_IDENTIFIER = com.andreivataselu.StudgetApp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 4.0;

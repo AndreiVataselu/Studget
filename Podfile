@@ -10,6 +10,7 @@ target 'Expense Manager' do
     pod 'JTAppleCalendar', '~> 7.0'
     pod 'Google-Mobile-Ads-SDK'
     pod 'Firebase/Core'
+    
 
 
 

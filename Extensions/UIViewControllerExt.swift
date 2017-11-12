@@ -27,6 +27,7 @@ import UIKit
         transition.type = kCATransitionMoveIn
         transition.subtype = kCATransitionFromLeft
         self.view.window?.layer.add(transition, forKey: kCATransition)
+        
 
         dismiss(animated: false, completion: nil)
 

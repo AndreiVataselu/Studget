@@ -60,8 +60,11 @@ class ViewController: UIViewController, NSFetchedResultsControllerDelegate,GADBa
         bannerView.rootViewController = self
         bannerView.delegate = self
         bannerView.load(GADRequest())
-        
+        print("PULA MEAAA: \(navigationController?.viewControllers.count)")
     }
+
+    
+    
     
     func adViewDidReceiveAd(_ bannerView: GADBannerView) {
         tableViewBottomConstraint.constant -= 50
@@ -101,7 +104,6 @@ class ViewController: UIViewController, NSFetchedResultsControllerDelegate,GADBa
     var fetchedResultsController: NSFetchedResultsController<Budget> {
         if budgetDeleted == true {
             _fetchedResultsController = nil
-            NSFetchedResultsController<NSFetchRequestResult>.deleteCache(withName: "cacheRequest")
             
             budgetDeleted = false
         }
@@ -124,7 +126,7 @@ class ViewController: UIViewController, NSFetchedResultsControllerDelegate,GADBa
         // nil for section name key path means "no sections".
     
     
-        let aFetchedResultsController = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: managedObjectContext!, sectionNameKeyPath: "dateSection", cacheName: "cacheRequest")
+        let aFetchedResultsController = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: managedObjectContext!, sectionNameKeyPath: "dateSection", cacheName: nil)
     
         aFetchedResultsController.delegate = self
         _fetchedResultsController = aFetchedResultsController
@@ -187,14 +189,20 @@ class ViewController: UIViewController, NSFetchedResultsControllerDelegate,GADBa
             (action) -> Void in
 
             guard let createAddBudgetVC = self.storyboard?.instantiateViewController(withIdentifier: "AddBudgetVC") else { return }
-            self.presentViewController(createAddBudgetVC)
+//            self.presentViewController(createAddBudgetVC)
+            if let navigator = self.navigationController {
+                navigator.pushViewController(createAddBudgetVC, animated: true)
+            }
         }
         
         let addExpenseAction = UIAlertAction(title: "Adauga plata", style: .default) {
             (action) -> Void in
 
             guard let createAddExpenseVC = self.storyboard?.instantiateViewController(withIdentifier: "AddExpenseVC") else { return }
-            self.presentViewController(createAddExpenseVC)
+            if let navigator = self.navigationController {
+                navigator.pushViewController(createAddExpenseVC, animated: true)
+            }
+            
             
         }
         
@@ -327,11 +335,11 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource,SwipeTableV
     }
     
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        if let sections = fetchedResultsController.sections {
-            let currentSections = sections[section]
-            return currentSections.name
+        if let object = fetchedResultsController.object(at: IndexPath(row: 0, section: section)) as? Budget {
+            return object.dateSection
+        } else {
+            return nil
         }
-        return nil
     }
     
 

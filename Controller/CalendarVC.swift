@@ -13,6 +13,28 @@ var periodString : String = ""
 var date1 = Date()
 var date2 = Date()
 
+fileprivate func < <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
+    switch (lhs, rhs) {
+    case let (l?, r?):
+        return l < r
+    case (nil, _?):
+        return true
+    default:
+        return false
+    }
+}
+
+fileprivate func > <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
+    switch (lhs, rhs) {
+    case let (l?, r?):
+        return l > r
+    default:
+        return rhs < lhs
+    }
+}
+
+
+
 class CalendarVC: UIViewController {
 
     @IBOutlet weak var calendarView: JTAppleCalendarView!
@@ -22,6 +44,9 @@ class CalendarVC: UIViewController {
     @IBOutlet weak var okButtonOutlet : UIButton!
     @IBOutlet weak var quickShowView : QuickShowView!
     var objectExistanceSwitch : Bool = false
+    
+    var percentDrivenInteractiveTransition: UIPercentDrivenInteractiveTransition!
+    var panGestureRecognizer: UIPanGestureRecognizer!
     
     let formatter = DateFormatter()
     var firstDate : Date?
@@ -40,11 +65,55 @@ class CalendarVC: UIViewController {
         yearLabel.addGestureRecognizer(tapYear)
         // Do any additional setup after loading the view.
         
-        let swipeRecognizer = UIScreenEdgePanGestureRecognizer(target: self, action: #selector(dismissViewController))
-        swipeRecognizer.edges = .left
-        self.view.addGestureRecognizer(swipeRecognizer)
+        addGesture()
+
     }
 
+    func addGesture() {
+        
+        guard navigationController?.viewControllers.count > 1 else {
+            return
+        }
+        
+        
+        panGestureRecognizer = UIPanGestureRecognizer(target: self, action: #selector(CalendarVC.handlePanGesture(_:)))
+        self.view.addGestureRecognizer(panGestureRecognizer)
+    }
+    
+    @objc func handlePanGesture(_ panGesture: UIPanGestureRecognizer) {
+        
+        let percent = max(panGesture.translation(in: view).x, 0) / view.frame.width
+        
+        switch panGesture.state {
+            
+        case .began:
+            navigationController?.delegate = self
+            _ = navigationController?.popViewController(animated: true)
+            
+        case .changed:
+            if let percentDrivenInteractiveTransition = percentDrivenInteractiveTransition {
+                percentDrivenInteractiveTransition.update(percent)
+            }
+            
+        case .ended:
+            let velocity = panGesture.velocity(in: view).x
+            
+            // Continue if drag more than 50% of screen width or velocity is higher than 1000
+            if percent > 0.5 || velocity > 1000 {
+                percentDrivenInteractiveTransition.finish()
+            } else {
+                percentDrivenInteractiveTransition.cancel()
+            }
+            
+        case .cancelled, .failed:
+            percentDrivenInteractiveTransition.cancel()
+            
+        default:
+            break
+        }
+    }
+    
+    
     @objc func monthTap (gestureRecognizer: UITapGestureRecognizer){
         print("month")
     }
@@ -247,7 +316,7 @@ class CalendarVC: UIViewController {
     
     @IBAction func backBtnPressed(_ sender: Any) {
         print("SENDER: CalendarVC")
-        dismissViewController()
+        navigationController?.popViewController(animated: true)
     }
     
     @IBAction func okButtonPressed(_ sender: Any) {
@@ -255,7 +324,9 @@ class CalendarVC: UIViewController {
         if objectExistanceSwitch{
         periodString = headerLabel.text!
         guard let showPeriodVC = self.storyboard?.instantiateViewController(withIdentifier: "PeriodExpenses") else { return }
-        presentViewController(showPeriodVC)
+            if let navigator = self.navigationController {
+                navigator.pushViewController(showPeriodVC, animated: true)
+            }
         } else {
             let noObjectAlert = UIAlertController(title: "Nicio intrare gasita pentru data aleasa", message: nil, preferredStyle: .alert)
             let okAction = UIAlertAction(title: "OK", style: .default, handler: nil)
@@ -405,3 +476,27 @@ extension CalendarVC: JTAppleCalendarViewDelegate {
         
     }
 }
+
+extension CalendarVC: UINavigationControllerDelegate {
+    
+    func navigationController(_ navigationController: UINavigationController, animationControllerFor operation: UINavigationControllerOperation, from fromVC: UIViewController, to toVC: UIViewController) -> UIViewControllerAnimatedTransitioning? {
+        
+        return SlideAnimatedTransitioning()
+    }
+    
+    func navigationController(_ navigationController: UINavigationController, interactionControllerFor animationController: UIViewControllerAnimatedTransitioning) -> UIViewControllerInteractiveTransitioning? {
+        
+        navigationController.delegate = nil
+        
+        if panGestureRecognizer.state == .began {
+            percentDrivenInteractiveTransition = UIPercentDrivenInteractiveTransition()
+            percentDrivenInteractiveTransition.completionCurve = .easeOut
+        } else {
+            percentDrivenInteractiveTransition = nil
+        }
+        
+        return percentDrivenInteractiveTransition
+    }
+}
+
+
