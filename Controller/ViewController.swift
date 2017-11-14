@@ -56,11 +56,10 @@ class ViewController: UIViewController, NSFetchedResultsControllerDelegate,GADBa
         
         bannerView.adSize = kGADAdSizeSmartBannerPortrait
         
-        bannerView.adUnitID = "ca-app-pub-3588787712275306/6954370602"
+//        bannerView.adUnitID = "ca-app-pub-3588787712275306/6954370602"
         bannerView.rootViewController = self
         bannerView.delegate = self
         bannerView.load(GADRequest())
-        print("PULA MEAAA: \(navigationController?.viewControllers.count)")
     }
 
     
@@ -256,12 +255,9 @@ extension ViewController {
         
         if color.description == green.description {
             // scade buget
-            
             userMoney[userMoney.count - 1].userMoney -= (getUserBudgetAtIndexPath(indexPath: indexPath).dataSum! as NSString).doubleValue
 
         } else {
-
-            
             userMoney[userMoney.count - 1].userMoney += (getUserBudgetAtIndexPath(indexPath: indexPath).dataSum! as NSString).doubleValue
         }
         
@@ -277,27 +273,20 @@ extension ViewController {
 extension ViewController: UITableViewDelegate, UITableViewDataSource,SwipeTableViewCellDelegate {
     
     func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath, for orientation: SwipeActionsOrientation) -> [SwipeAction]? {
-      guard orientation == .right else {
-        let cancelAction = SwipeAction(style: .default, title: "Anuleaza"){
-            (action, indexPath)
-            in
-            
-            self.cancelCell(color: self.getUserBudgetAtIndexPath(indexPath: indexPath).dataColor as! UIColor, atIndexPath: indexPath)
-            self.removeCell(atIndexPath: indexPath)
-            self.fetchCoreDataObject()
-        }
-            cancelAction.backgroundColor = UIColor(red:0.16, green:0.63, blue:0.74, alpha:1.0)
-            return [cancelAction]
-        }
+
+        guard orientation == .right else {return nil}
         
         let deleteAction = SwipeAction(style: .destructive, title: "Sterge") { (action, indexPath) in
+            
+            self.cancelCell(color: self.getUserBudgetAtIndexPath(indexPath: indexPath).dataColor as! UIColor, atIndexPath: indexPath)
             self.removeCell(atIndexPath: indexPath)
             self.fetchCoreDataObject()
 
         }
         deleteAction.backgroundColor = red
-        
+
         return [deleteAction]
+        
     }
     
     

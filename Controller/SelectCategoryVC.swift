@@ -1,12 +1,12 @@
 //
-//  AddExpenseVC.swift
+//  SelectCategoryVC.swift
 //  Expense Manager
 //
-//  Created by Andrei Vataselu on 10/4/17.
+//  Created by Andrei Vataselu on 11/14/17.
 //  Copyright © 2017 Andrei Vataselu. All rights reserved.
 //
-
 import UIKit
+import CoreData
 
 fileprivate func < <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
     switch (lhs, rhs) {
@@ -28,49 +28,52 @@ fileprivate func > <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
     }
 }
 
-class AddExpenseVC: UIViewController, UITextFieldDelegate {
-    
-    var percentDrivenInteractiveTransition: UIPercentDrivenInteractiveTransition!
+class SelectCategoryVC: UIViewController {
     var panGestureRecognizer: UIPanGestureRecognizer!
+    var percentDrivenInteractiveTransition: UIPercentDrivenInteractiveTransition!
     
-    @IBOutlet weak var userBudgetLabel: UILabel!
-    @IBOutlet weak var addBtn: UIButton!
-    @IBOutlet weak var sumField: UITextField!
-    @IBOutlet weak var bottomConstraint: NSLayoutConstraint!
     @IBOutlet weak var tableView : UITableView!
-
-    
-    @IBOutlet weak var descriptionField: UITextField!
+    @IBOutlet weak var newCategoryButton : UIButton!
+    @IBOutlet weak var addCategoryButton : UIButton!
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.hideKeyboard()
-        self.sumField.delegate = self
+        addGesture()
+        
+        let view = UIView()
+        tableView.tableFooterView = view
         
         tableView.delegate = self
         tableView.dataSource = self
         
-        let tvFooter = UIView()
-        tableView.tableFooterView = tvFooter
-        tableView.isScrollEnabled = false
-
-        tableView.reloadData()
+        fetchCoreDataObject()
         
-        btc = bottomConstraint
-        
-        if userMoney.count > 0 {
-            userBudgetLabel.text = replaceLabel(number: userMoney[userMoney.count - 1].userMoney)
+        addCategoryButton.isHidden = true
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        fetchCoreDataObject()
+    }
+    
+    func fetchCoreDataObject() {
+        fetchCategories { (complete) in
+            if complete {
+                if userCategories.count == 0 {
+                    tableView.isHidden = true
+                } else {
+                    tableView.reloadData()
+                    tableView.isHidden = false
+                }
+            }
         }
-        
-        self.addBtn.bindToKeyboard()
-
-        addGesture()
     }
     
     
-    override func viewDidAppear(_ animated: Bool) {
-        addBtn.bindToKeyboard()
+    
+    override func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
+        // Dispose of any resources that can be recreated.
     }
     
     func addGesture() {
@@ -79,10 +82,8 @@ class AddExpenseVC: UIViewController, UITextFieldDelegate {
             return
         }
         
-        
-        panGestureRecognizer = UIPanGestureRecognizer(target: self, action: #selector(AddExpenseVC.handlePanGesture(_:)))
+        panGestureRecognizer = UIPanGestureRecognizer(target: self, action: #selector(SelectCategoryVC.handlePanGesture(_:)))
         self.view.addGestureRecognizer(panGestureRecognizer)
-        
     }
     
     @objc func handlePanGesture(_ panGesture: UIPanGestureRecognizer) {
@@ -118,50 +119,18 @@ class AddExpenseVC: UIViewController, UITextFieldDelegate {
         }
     }
     
-    @IBAction func backBtnPressed(_ sender: Any) {
-        print("SENDER: add expense")
+    @IBAction func backButtonPressed(_ sender: Any) {
         navigationController?.popViewController(animated: true)
     }
     
-    @IBAction func addBtnPressed(_ sender: Any) {
-        var descriptionCheck = descriptionField.text!
-        if descriptionCheck == "" {
-            descriptionCheck = "Plata noua"
-        }
-        
-        let sumFieldDecimal = sumField.text?.replacingOccurrences(of: ",", with: ".", options: .literal, range: nil)
-
-        
-        if sumFieldDecimal == "" {
-            sumInvalidAlert()
-        } else {
-            userMoney[userMoney.count-1].userMoney -= (sumFieldDecimal! as NSString).doubleValue
-            self.saveMoney(userMoney: userMoney[userMoney.count-1].userMoney, completion: { (complete) in
-            })
-            self.save(sumText: sumFieldDecimal! , dataDescription: descriptionCheck, dataColor: red){ complete in
-            if complete {
-                
-                navigationController?.popViewController(animated: true)
-            }
-        }
-
+    @IBAction func addCategory(_ sender: UIButton) {
+        let addCatVC = storyboard?.instantiateViewController(withIdentifier: "AddCategoryVC")
+        navigationController?.pushViewController(addCatVC!, animated: true)
     }
     
 }
-    
-    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
-        
-        // Get text
-        let currentText = textField.text ?? ""
-        let replacementText = (currentText as NSString).replacingCharacters(in: range, with: string)
-        
-        // Validate
-        return replacementText.isValidDecimal(maximumFractionDigits: 2)
-        
-    }
-}
 
-extension AddExpenseVC : UINavigationControllerDelegate {
+extension SelectCategoryVC: UINavigationControllerDelegate {
     
     func navigationController(_ navigationController: UINavigationController, animationControllerFor operation: UINavigationControllerOperation, from fromVC: UIViewController, to toVC: UIViewController) -> UIViewControllerAnimatedTransitioning? {
         
@@ -181,38 +150,26 @@ extension AddExpenseVC : UINavigationControllerDelegate {
         
         return percentDrivenInteractiveTransition
     }
+    
 }
 
-extension AddExpenseVC : UITableViewDataSource, UITableViewDelegate {
+extension SelectCategoryVC : UITableViewDelegate, UITableViewDataSource {
     func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 1
+        return userCategories.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "PickCategoryCell") as! PickCategoryCell
-        cell.labelView.text = "Categorie (Optional)"
+        let cell = tableView.dequeueReusableCell(withIdentifier: "CategoryCell") as! CategoryCell
+        
+        cell.configureCell(title: userCategories[indexPath.row].categoryName!)
         
         return cell
     }
     
     
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        print(indexPath.row)
-        switch indexPath.row {
-            
-        case 0:
-        
-        self.addBtn.removeBind()
-        let selectCatVC = storyboard?.instantiateViewController(withIdentifier: "SelectCategoryVC")
-        navigationController?.pushViewController(selectCatVC!, animated: true)
-        tableView.deselectRow(at: indexPath, animated: true)
-        
-        default: break
-        }
-    }
-
+    
 }

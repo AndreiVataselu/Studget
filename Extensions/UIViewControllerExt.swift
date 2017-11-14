@@ -11,6 +11,21 @@ import UIKit
 
 @objc extension UIViewController {
     
+    func fetchCategories (completion: (_ complete: Bool) -> ()) {
+        
+        guard let managedContext = appDelegate?.persistentContainer.viewContext else {return}
+        
+        let fetchCategoryRequest = NSFetchRequest<Categories>(entityName: "Categories")
+        
+        do {
+            userCategories = try managedContext.fetch(fetchCategoryRequest)
+            completion(true)
+        } catch {
+            completion(false)
+        }
+        
+    }
+    
     func presentViewController(_ viewControllerToPresent: UIViewController) {
         let transition = CATransition()
         transition.duration = 0.3
@@ -40,11 +55,25 @@ import UIKit
             action: #selector(UIViewController.dismissKeyboard))
         
         view.addGestureRecognizer(tap)
+        tap.cancelsTouchesInView = false
     }
     
     @objc func dismissKeyboard()
     {
         view.endEditing(true)
+    }
+    
+    func saveCategory(category: String, completion : (_ finished: Bool) -> ()) {
+        let categ = NSEntityDescription.insertNewObject(forEntityName: "Categories", into: managedObjectContext!) as! Categories
+        
+        categ.categoryName = category
+        
+        do {
+            try managedObjectContext?.save()
+            completion(true)
+        } catch {
+            completion(false)
+        }
     }
     
     func save(sumText: String, dataDescription: String, dataColor: UIColor, completion: (_ finished: Bool) -> ()) {
@@ -55,6 +84,7 @@ import UIKit
         budget.dataColor = dataColor
         budget.dateSubmitted = Date()
         budget.dateSection = formatDate(date: Date())
+
         
         do{
             try managedObjectContext?.save()

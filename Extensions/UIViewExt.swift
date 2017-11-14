@@ -28,7 +28,13 @@ extension UIView {
         },completion: nil)
         
             btc.constant += deltaY
+        
+            print(deltaY)
 
+    }
+    
+    func removeBind() {
+        NotificationCenter.default.removeObserver(self)
     }
     
     

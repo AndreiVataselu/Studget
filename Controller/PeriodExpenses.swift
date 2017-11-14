@@ -30,16 +30,19 @@ fileprivate func > <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
     }
 }
 
+var filteredItems = [Budget]()
 
 class PeriodExpenses: UIViewController, NSFetchedResultsControllerDelegate, GADBannerViewDelegate{
 
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var periodLabel: UILabel!
     @IBOutlet var bannerView: GADBannerView!
-
+    @IBOutlet weak var noResultsFoundLabel : UILabel!
+    
     var percentDrivenInteractiveTransition: UIPercentDrivenInteractiveTransition!
     var panGestureRecognizer: UIPanGestureRecognizer!
-    
+    var searchBar = UISearchBar()
+
     @IBOutlet weak var tableViewBottomConstraint: NSLayoutConstraint!
     
     override func viewDidLoad() {
@@ -50,15 +53,29 @@ class PeriodExpenses: UIViewController, NSFetchedResultsControllerDelegate, GADB
         periodLabel.text = periodString
         bannerView.adSize = kGADAdSizeSmartBannerPortrait
 
-        bannerView.adUnitID = "ca-app-pub-3588787712275306/8074266186"
+//        bannerView.adUnitID = "ca-app-pub-3588787712275306/8074266186"
         bannerView.rootViewController = self
         bannerView.delegate = self
         bannerView.load(GADRequest())
-
         
+        searchBar.frame = CGRect(x: 0, y: 0, width: tableView.frame.width, height: 45)
+        searchBar.barTintColor = UIColor(red:0.54, green:0.77, blue:0.80, alpha:1.0)
+        searchBar.placeholder = "Cauta cheltuieli"
+        searchBar.backgroundImage = #imageLiteral(resourceName: "searchbarback")
+        
+        searchBar.delegate = self
+        
+        tableView.tableHeaderView = searchBar
+        tableView.setContentOffset(CGPoint.init(x: 0, y: 44), animated: true)
+
         addGesture()
 
     }
+    
+    func searchBarIsEmpty() -> Bool {
+        return searchBar.text?.isEmpty ?? true
+    }
+
     
     func addGesture() {
         
@@ -103,6 +120,7 @@ class PeriodExpenses: UIViewController, NSFetchedResultsControllerDelegate, GADB
             break
         }
     }
+    
     
     func adViewDidReceiveAd(_ bannerView: GADBannerView) {
         tableViewBottomConstraint.constant -= 50
@@ -167,13 +185,49 @@ class PeriodExpenses: UIViewController, NSFetchedResultsControllerDelegate, GADB
     }
 }
 
-extension PeriodExpenses : UITableViewDelegate, UITableViewDataSource {
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return fetchedResultsController.sections![section].numberOfObjects
+extension PeriodExpenses : UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate {
+    
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        filteredItems = (fetchedResultsController.fetchedObjects?.filter({(budget : Budget) -> Bool in
+            return (budget.dataDescription?.lowercased().contains(searchText.lowercased()))!
+        }))!
+        
+        if filteredItems.count == 0  && searchText != "" {
+            noResultsFoundLabel.isHidden = false
+        } else {
+            noResultsFoundLabel.isHidden = true
+        }
+        tableView.reloadData()
     }
 
+    
+    func isFiltering() -> Bool {
+        return !searchBarIsEmpty()
+    }
+    
+    
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        
+        if isFiltering() {
+            return filteredItems.count
+        }
+        
+        return fetchedResultsController.sections![section].numberOfObjects
+    }
+    
+    
+
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        if let object = fetchedResultsController.object(at: IndexPath(row: 0, section: section)) as? Budget {
+        
+        if isFiltering() {
+            if filteredItems.count == 0 {
+                return nil
+            }
+            return "Rezultate cautare: "
+            
+        } else
+            if let object = fetchedResultsController.object(at: IndexPath(row: 0, section: section)) as? Budget {
             return object.dateSection
         } else {
             return nil
@@ -182,14 +236,29 @@ extension PeriodExpenses : UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "periodCell") as! ExpenseCell
-        let budget = fetchedResultsController.object(at: indexPath)
+        var budget = Budget()
+
+        if isFiltering() {
+            budget = filteredItems[indexPath.row]
+         
+        } else {
+            budget = fetchedResultsController.object(at: indexPath)
+        }
+        
         cell.configureCell(budget: budget)
         cell.selectionStyle = .none
         
         return cell
     }
+    
 
     func numberOfSections(in tableView: UITableView) -> Int {
+        if isFiltering() {
+            if filteredItems.count == 0 {
+                return 0
+            }
+            return 1
+        }
         return (fetchedResultsController.sections?.count)!
     }
 

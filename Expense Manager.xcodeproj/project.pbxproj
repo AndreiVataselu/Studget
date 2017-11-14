@@ -20,6 +20,11 @@
 		F12F9F1B1F928FF500A7F24A /* MenuCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F12F9F1A1F928FF500A7F24A /* MenuCell.swift */; };
 		F130C8F41F8FE673005A4A41 /* StringExt.swift in Sources */ = {isa = PBXBuildFile; fileRef = F130C8F31F8FE673005A4A41 /* StringExt.swift */; };
 		F13131E71F8EA44F00BFCF41 /* NSLayoutConstraintsExt.swift in Sources */ = {isa = PBXBuildFile; fileRef = F13131E61F8EA44F00BFCF41 /* NSLayoutConstraintsExt.swift */; };
+		F13D0D8B1FBA328700C4FBB8 /* CategoriesVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F13D0D8A1FBA328700C4FBB8 /* CategoriesVC.swift */; };
+		F13D0D8D1FBA374D00C4FBB8 /* AddCategoryVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F13D0D8C1FBA374D00C4FBB8 /* AddCategoryVC.swift */; };
+		F1882FA61FBAFC3B00954334 /* CategoryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1882FA51FBAFC3B00954334 /* CategoryCell.swift */; };
+		F1ACCADB1FBB79BD00AC9FAE /* PickCategoryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1ACCADA1FBB79BD00AC9FAE /* PickCategoryCell.swift */; };
+		F1ACCADD1FBB80C600AC9FAE /* SelectCategoryVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1ACCADC1FBB80C600AC9FAE /* SelectCategoryVC.swift */; };
 		F1B358381F9015AF00A75B4F /* MenuVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1B358371F9015AF00A75B4F /* MenuVC.swift */; };
 		F1BFF3DD1F9D51AA00D0F8F5 /* CalendarCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1BFF3DC1F9D51AA00D0F8F5 /* CalendarCell.swift */; };
 		F1BFF3E11F9D56B500D0F8F5 /* CalendarVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1BFF3E01F9D56B500D0F8F5 /* CalendarVC.swift */; };
@@ -52,6 +57,11 @@
 		F12F9F1A1F928FF500A7F24A /* MenuCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuCell.swift; sourceTree = "<group>"; };
 		F130C8F31F8FE673005A4A41 /* StringExt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringExt.swift; sourceTree = "<group>"; };
 		F13131E61F8EA44F00BFCF41 /* NSLayoutConstraintsExt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NSLayoutConstraintsExt.swift; sourceTree = "<group>"; };
+		F13D0D8A1FBA328700C4FBB8 /* CategoriesVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoriesVC.swift; sourceTree = "<group>"; };
+		F13D0D8C1FBA374D00C4FBB8 /* AddCategoryVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddCategoryVC.swift; sourceTree = "<group>"; };
+		F1882FA51FBAFC3B00954334 /* CategoryCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryCell.swift; sourceTree = "<group>"; };
+		F1ACCADA1FBB79BD00AC9FAE /* PickCategoryCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PickCategoryCell.swift; sourceTree = "<group>"; };
+		F1ACCADC1FBB80C600AC9FAE /* SelectCategoryVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectCategoryVC.swift; sourceTree = "<group>"; };
 		F1B358371F9015AF00A75B4F /* MenuVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuVC.swift; sourceTree = "<group>"; };
 		F1BFF3DC1F9D51AA00D0F8F5 /* CalendarCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarCell.swift; sourceTree = "<group>"; };
 		F1BFF3E01F9D56B500D0F8F5 /* CalendarVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarVC.swift; sourceTree = "<group>"; };
@@ -137,6 +147,8 @@
 				F12F9F1A1F928FF500A7F24A /* MenuCell.swift */,
 				F1BFF3DC1F9D51AA00D0F8F5 /* CalendarCell.swift */,
 				F1D52B391F9FA1910024EED5 /* QuickShowView.swift */,
+				F1882FA51FBAFC3B00954334 /* CategoryCell.swift */,
+				F1ACCADA1FBB79BD00AC9FAE /* PickCategoryCell.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -154,10 +166,13 @@
 				F116F2DB1F838B650038F163 /* ViewController.swift */,
 				F1DE5DB21F85705500D264F5 /* AddBudgetVC.swift */,
 				F1DE5DB41F85706300D264F5 /* AddExpenseVC.swift */,
+				F13D0D8C1FBA374D00C4FBB8 /* AddCategoryVC.swift */,
 				F1B358371F9015AF00A75B4F /* MenuVC.swift */,
 				F1BFF3E01F9D56B500D0F8F5 /* CalendarVC.swift */,
 				F122771E1FA5F528002BF69D /* PeriodExpenses.swift */,
 				F12CE5191FB3B86D00247F87 /* FirstNavigation.swift */,
+				F13D0D8A1FBA328700C4FBB8 /* CategoriesVC.swift */,
+				F1ACCADC1FBB80C600AC9FAE /* SelectCategoryVC.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -328,10 +343,13 @@
 				F108A7E31FB3AB37000649BC /* SwipeInteractionController.swift in Sources */,
 				F116F2DC1F838B650038F163 /* ViewController.swift in Sources */,
 				F12F9F1B1F928FF500A7F24A /* MenuCell.swift in Sources */,
+				F13D0D8B1FBA328700C4FBB8 /* CategoriesVC.swift in Sources */,
 				F1DE5DB31F85705500D264F5 /* AddBudgetVC.swift in Sources */,
 				F1BFF3E11F9D56B500D0F8F5 /* CalendarVC.swift in Sources */,
 				F1DE5DB81F8575D700D264F5 /* UIViewControllerExt.swift in Sources */,
+				F1ACCADD1FBB80C600AC9FAE /* SelectCategoryVC.swift in Sources */,
 				F130C8F41F8FE673005A4A41 /* StringExt.swift in Sources */,
+				F13D0D8D1FBA374D00C4FBB8 /* AddCategoryVC.swift in Sources */,
 				F12CE5181FB3B49200247F87 /* SlideAnimatedTransitioning.swift in Sources */,
 				F13131E71F8EA44F00BFCF41 /* NSLayoutConstraintsExt.swift in Sources */,
 				F1B358381F9015AF00A75B4F /* MenuVC.swift in Sources */,
@@ -343,6 +361,8 @@
 				F116F2DA1F838B650038F163 /* AppDelegate.swift in Sources */,
 				F1D52B3A1F9FA1910024EED5 /* QuickShowView.swift in Sources */,
 				F12CE51A1FB3B86D00247F87 /* FirstNavigation.swift in Sources */,
+				F1ACCADB1FBB79BD00AC9FAE /* PickCategoryCell.swift in Sources */,
+				F1882FA61FBAFC3B00954334 /* CategoryCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

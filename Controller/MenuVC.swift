@@ -35,7 +35,7 @@ class MenuVC: UITableViewController {
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return 2
+        return 3
     }
 
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -48,6 +48,12 @@ class MenuVC: UITableViewController {
            guard let showCalendar =  self.storyboard?.instantiateViewController(withIdentifier: "CalendarVC") else { return }
            if let navigator = self.navigationController {
             navigator.pushViewController(showCalendar, animated: true)
+            }
+            
+        case 2:
+            guard let showCategoriesVC = self.storyboard?.instantiateViewController(withIdentifier: "CategoriesVC") else {return}
+            if let navigator = self.navigationController {
+                navigator.pushViewController(showCategoriesVC, animated: true)
             }
             
         default: print("none")
