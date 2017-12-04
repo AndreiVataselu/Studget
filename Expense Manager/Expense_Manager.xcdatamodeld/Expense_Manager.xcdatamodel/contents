@@ -6,17 +6,18 @@
         <attribute name="dataSum" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="dateSection" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="dateSubmitted" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
-        <relationship name="category" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Categories" inverseName="expense" inverseEntity="Categories" syncable="YES"/>
+        <attribute name="type" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="category" optional="YES" maxCount="1" deletionRule="No Action" destinationEntity="Categories" inverseName="isUsedby" inverseEntity="Categories" syncable="YES"/>
     </entity>
     <entity name="Categories" representedClassName="Categories" syncable="YES" codeGenerationType="class">
         <attribute name="categoryName" optional="YES" attributeType="String" syncable="YES"/>
-        <relationship name="expense" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Budget" inverseName="category" inverseEntity="Budget" syncable="YES"/>
+        <relationship name="isUsedby" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Budget" inverseName="category" inverseEntity="Budget" syncable="YES"/>
     </entity>
     <entity name="UserMoney" representedClassName="UserMoney" syncable="YES" codeGenerationType="class">
         <attribute name="userMoney" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES" syncable="YES"/>
     </entity>
     <elements>
-        <element name="Budget" positionX="63" positionY="-135" width="128" height="135"/>
+        <element name="Budget" positionX="63" positionY="-135" width="128" height="148"/>
         <element name="Categories" positionX="-153" positionY="-27" width="128" height="75"/>
         <element name="UserMoney" positionX="268" positionY="-69" width="128" height="60"/>
     </elements>

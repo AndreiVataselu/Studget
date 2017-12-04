@@ -49,8 +49,8 @@ class AddCategoryVC: UIViewController {
     }
     
     override func viewDidAppear(_ animated: Bool) {
-        btc = addBtnConstraint
-        btc.constant = 0
+//        btc = addBtnConstraint
+//        btc.constant = 0
     }
     
     
@@ -97,8 +97,12 @@ class AddCategoryVC: UIViewController {
     }
     
     @IBAction func addBtnPressed(_ sender: UIButton) {
+        
+        
+        //MARK:- Localized
+        
         if textField.text == "" {
-            let alertController = UIAlertController(title: "Nicio categorie introdusa", message: nil, preferredStyle: .alert)
+            let alertController = UIAlertController(title: NSLocalizedString("noCategoryAlert", comment: ""), message: nil, preferredStyle: .alert)
             let okAction = UIAlertAction(title: "OK", style: .default, handler: nil)
             
             alertController.addAction(okAction)
@@ -113,9 +117,9 @@ class AddCategoryVC: UIViewController {
                     categoryName = textField.text!
                 }
             }
-            
+
             if categoryAlreadyExists {
-                let alreadyExistingCategoryController = UIAlertController(title: "Categoria \(categoryName) exista deja.", message: nil, preferredStyle: .alert)
+                let alreadyExistingCategoryController = UIAlertController(title: String(format: NSLocalizedString("categoryExists", comment: ""),categoryName), message: nil, preferredStyle: .alert)
                 let okAction = UIAlertAction(title: "OK", style: .default, handler: nil)
                 alreadyExistingCategoryController.addAction(okAction)
                 present(alreadyExistingCategoryController, animated: true)

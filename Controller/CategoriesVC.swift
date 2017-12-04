@@ -63,6 +63,7 @@ class CategoriesVC: UIViewController {
                 if userCategories.count == 0 {
                     tableView.isHidden = true
                 } else {
+                    userCategories.reverse()
                     tableView.reloadData()
                     tableView.isHidden = false
                 }
@@ -161,7 +162,7 @@ extension CategoriesVC : UITableViewDelegate, UITableViewDataSource, SwipeTableV
         
         guard orientation == .right else {return nil}
         
-        let deleteAction = SwipeAction(style: .destructive, title: "Sterge") { (action, indexPath) in
+        let deleteAction = SwipeAction(style: .destructive, title: NSLocalizedString("deleteCell", comment: "")) { (action, indexPath) in
 
             guard let managedContext = appDelegate?.persistentContainer.viewContext else { return }
             
@@ -201,6 +202,10 @@ extension CategoriesVC : UITableViewDelegate, UITableViewDataSource, SwipeTableV
         cell.delegate = self
         
         return cell
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
     }
     
     

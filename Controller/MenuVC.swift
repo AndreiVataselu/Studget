@@ -62,11 +62,13 @@ class MenuVC: UITableViewController {
         
     }
     
+    
+    //MARK:- Localized
     func deleteBudget(){
-        let sureCheck = UIAlertController(title: "Stergere Buget", message: "Odata cu stergerea bugetului, datele nu mai pot fi recuperate. Apasa Da pentru confirmare.", preferredStyle: .alert)
+        let sureCheck = UIAlertController(title: NSLocalizedString("eraseBudgetTitle", comment: ""), message: NSLocalizedString("eraseBudgetMsg", comment: ""), preferredStyle: .alert)
         
-        let noAlert = UIAlertAction(title: "Nu", style: .default, handler: nil)
-        let yesAlert = UIAlertAction(title: "Da", style: .destructive) {
+        let noAlert = UIAlertAction(title: NSLocalizedString("noAns", comment: ""), style: .default, handler: nil)
+        let yesAlert = UIAlertAction(title: NSLocalizedString("yesAns", comment: ""), style: .destructive) {
             action -> Void in
             
             guard let managedContext = appDelegate?.persistentContainer.viewContext else { return }
@@ -88,7 +90,7 @@ class MenuVC: UITableViewController {
             
             budgetDeleted = true
          
-            let succesDelete = UIAlertController(title: "Buget sters cu succes!", message: nil, preferredStyle: .alert)
+            let succesDelete = UIAlertController(title: NSLocalizedString("succesMsg", comment: ""), message: nil, preferredStyle: .alert)
             let okAction = UIAlertAction(title: "OK", style: .default, handler: { (action) in
                 self.dismiss(animated: true, completion: nil)
             })

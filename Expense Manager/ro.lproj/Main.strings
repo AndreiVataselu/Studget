@@ -1,0 +1,213 @@
+
+/* Class = "UIButton"; normalTitle = "ADAUGA"; ObjectID = "1Jp-PY-T65"; */
+"1Jp-PY-T65.normalTitle" = "ADAUGA";
+
+/* Class = "UILabel"; text = "Bugetul tau"; ObjectID = "2hv-iT-YCC"; */
+"2hv-iT-YCC.text" = "Bugetul tau";
+
+/* Class = "UILabel"; text = "Adauga o suma la bugetul tau"; ObjectID = "4G3-9t-g5T"; */
+"4G3-9t-g5T.text" = "Adauga o suma la bugetul tau";
+
+/* Class = "UITextField"; placeholder = "DESCRIERE"; ObjectID = "5BF-Xc-iF8"; */
+"5BF-Xc-iF8.placeholder" = "DESCRIERE";
+
+/* Class = "UILabel"; text = "Mar"; ObjectID = "5EE-9T-MvW"; */
+"5EE-9T-MvW.text" = "Mar";
+
+/* Class = "UILabel"; text = "Vizualizare rapida a cheltuielilor"; ObjectID = "5eR-9b-ro0"; */
+"5eR-9b-ro0.text" = "Vizualizare rapida a cheltuielilor";
+
+/* Class = "UILabel"; text = "Categorii cheltuieli"; ObjectID = "62u-Sx-diG"; */
+"62u-Sx-diG.text" = "Categorii cheltuieli";
+
+/* Class = "UILabel"; text = "Lun"; ObjectID = "8Rx-i5-R72"; */
+"8Rx-i5-R72.text" = "Lun";
+
+/* Class = "UILabel"; text = "dateLabel"; ObjectID = "A6W-7g-sHl"; */
+"A6W-7g-sHl.text" = "dateLabel";
+
+/* Class = "UILabel"; text = "Label"; ObjectID = "A7e-uF-osQ"; */
+"A7e-uF-osQ.text" = "Label";
+
+/* Class = "UILabel"; text = "Suma"; ObjectID = "ANN-lk-dfg"; */
+"ANN-lk-dfg.text" = "Suma";
+
+/* Class = "UILabel"; text = "Nu exista categorii"; ObjectID = "AS6-7k-13T"; */
+"AS6-7k-13T.text" = "Nu exista categorii";
+
+/* Class = "UIButton"; normalTitle = "ADAUGA"; ObjectID = "AaI-xR-noe"; */
+"AaI-xR-noe.normalTitle" = "ADAUGA";
+
+/* Class = "UILabel"; text = "typeLabel"; ObjectID = "Awi-Sh-ckA"; */
+"Awi-Sh-ckA.text" = "typeLabel";
+
+/* Class = "UILabel"; text = "Adauga plata din buget"; ObjectID = "EfV-Yp-xbp"; */
+"EfV-Yp-xbp.text" = "Adauga plata din buget";
+
+/* Class = "UILabel"; text = "Dum"; ObjectID = "Eut-kb-i97"; */
+"Eut-kb-i97.text" = "Dum";
+
+/* Class = "UITextField"; placeholder = "SUMA"; ObjectID = "Gos-hZ-E3a"; */
+"Gos-hZ-E3a.placeholder" = "SUMA";
+
+/* Class = "UILabel"; text = "Bugetul tau"; ObjectID = "HR0-s7-nVl"; */
+"HR0-s7-nVl.text" = "Bugetul tau";
+
+/* Class = "UILabel"; text = "Descriere:"; ObjectID = "Hmj-Yc-SD8"; */
+"Hmj-Yc-SD8.text" = "Descriere:";
+
+/* Class = "UILabel"; text = "Categorii"; ObjectID = "I2m-fp-Gmd"; */
+"I2m-fp-Gmd.text" = "Categorii";
+
+/* Class = "UILabel"; text = "Data:"; ObjectID = "IoQ-hG-kdh"; */
+"IoQ-hG-kdh.text" = "Data:";
+
+/* Class = "UILabel"; text = "Buget:"; ObjectID = "Ktj-qi-ojI"; */
+"Ktj-qi-ojI.text" = "Buget:";
+
+/* Class = "UILabel"; text = "Filtru cautare"; ObjectID = "LyJ-cd-roD"; */
+"LyJ-cd-roD.text" = "Filtru cautare";
+
+/* Class = "UILabel"; text = "Continua prin a adauga un buget"; ObjectID = "MBM-ip-ycb"; */
+"MBM-ip-ycb.text" = "Continua prin a adauga un buget";
+
+/* Class = "UILabel"; text = "Perioada"; ObjectID = "NAz-sz-SJN"; */
+"NAz-sz-SJN.text" = "Perioada";
+
+/* Class = "UILabel"; text = "Niciun rezultat gasit"; ObjectID = "NbR-v0-Zdl"; */
+"NbR-v0-Zdl.text" = "Niciun rezultat gasit";
+
+/* Class = "UILabel"; text = "15000 RON"; ObjectID = "NbU-U9-0D0"; */
+"NbU-U9-0D0.text" = "15000 RON";
+
+/* Class = "UILabel"; text = "Bugetul tau"; ObjectID = "NtV-Tu-8nW"; */
+"NtV-Tu-8nW.text" = "Bugetul tau";
+
+/* Class = "UIButton"; normalTitle = "ADAUGA"; ObjectID = "PIA-8m-dgy"; */
+"PIA-8m-dgy.normalTitle" = "ADAUGA";
+
+/* Class = "UILabel"; text = "Title"; ObjectID = "PJt-js-PqN"; */
+"PJt-js-PqN.text" = "Title";
+
+/* Class = "UITextField"; placeholder = "DESCRIERE"; ObjectID = "SLu-wt-RQC"; */
+"SLu-wt-RQC.placeholder" = "DESCRIERE";
+
+/* Class = "UITextField"; placeholder = "SUMA"; ObjectID = "UX1-Ih-JNr"; */
+"UX1-Ih-JNr.placeholder" = "SUMA";
+
+/* Class = "UILabel"; text = "Categorii"; ObjectID = "VUw-gg-tGB"; */
+"VUw-gg-tGB.text" = "Categorii";
+
+/* Class = "UILabel"; text = "Categorie:"; ObjectID = "W8i-dp-liM"; */
+"W8i-dp-liM.text" = "Categorie:";
+
+/* Class = "UILabel"; text = "Selecteaza o perioada"; ObjectID = "Z7T-Up-5Zb"; */
+"Z7T-Up-5Zb.text" = "Selecteaza o perioada";
+
+/* Class = "UILabel"; text = "Descriere"; ObjectID = "b62-nc-eVx"; */
+"b62-nc-eVx.text" = "Descriere";
+
+/* Class = "UILabel"; text = "Descriere"; ObjectID = "cas-Lp-tCv"; */
+"cas-Lp-tCv.text" = "Descriere";
+
+/* Class = "UILabel"; text = "Tip:"; ObjectID = "d1f-Ht-Q3k"; */
+"d1f-Ht-Q3k.text" = "Tip:";
+
+/* Class = "UILabel"; text = "15000 RON"; ObjectID = "eua-PV-5m0"; */
+"eua-PV-5m0.text" = "15000 RON";
+
+/* Class = "UILabel"; text = "Suma"; ObjectID = "fge-f1-qDY"; */
+"fge-f1-qDY.text" = "Suma";
+
+/* Class = "UILabel"; text = "Title"; ObjectID = "hDC-j5-srd"; */
+"hDC-j5-srd.text" = "Title";
+
+/* Class = "UILabel"; text = "catLabel"; ObjectID = "hkR-1j-GIr"; */
+"hkR-1j-GIr.text" = "catLabel";
+
+/* Class = "UILabel"; text = "descLabel"; ObjectID = "hxV-sf-Aib"; */
+"hxV-sf-Aib.text" = "descLabel";
+
+/* Class = "UITextField"; placeholder = "Denumire categorie"; ObjectID = "i6S-Km-5Ei"; */
+"i6S-Km-5Ei.placeholder" = "Denumire categorie";
+
+/* Class = "UILabel"; text = "year"; ObjectID = "iy9-Oq-eJi"; */
+"iy9-Oq-eJi.text" = "year";
+
+/* Class = "UILabel"; text = "Sam"; ObjectID = "j1T-2x-jH0"; */
+"j1T-2x-jH0.text" = "Sam";
+
+/* Class = "UILabel"; text = "Mie"; ObjectID = "jz8-9g-k6R"; */
+"jz8-9g-k6R.text" = "Mie";
+
+/* Class = "UILabel"; text = "Suma:"; ObjectID = "lFf-Dr-l2e"; */
+"lFf-Dr-l2e.text" = "Suma:";
+
+/* Class = "UILabel"; text = "Month"; ObjectID = "mry-0k-g2e"; */
+"mry-0k-g2e.text" = "Month";
+
+/* Class = "UILabel"; text = "Bine ai venit! "; ObjectID = "n8Q-lB-qqY"; */
+"n8Q-lB-qqY.text" = "Bine ai venit! ";
+
+/* Class = "UITextField"; placeholder = "SUMA"; ObjectID = "oLJ-CV-njw"; */
+"oLJ-CV-njw.placeholder" = "SUMA";
+
+/* Class = "UILabel"; text = "Title"; ObjectID = "ocD-hk-HIJ"; */
+"ocD-hk-HIJ.text" = "Title";
+
+/* Class = "UILabel"; text = "Cheltuieli:"; ObjectID = "pIX-iE-GkN"; */
+"pIX-iE-GkN.text" = "Cheltuieli:";
+
+/* Class = "UIButton"; normalTitle = "ADAUGA"; ObjectID = "pm6-8n-65h"; */
+"pm6-8n-65h.normalTitle" = "ADAUGA";
+
+/* Class = "UILabel"; text = "Detalii"; ObjectID = "pry-1C-LZ7"; */
+"pry-1C-LZ7.text" = "Detalii";
+
+/* Class = "UILabel"; text = "Sterge Buget"; ObjectID = "qoP-33-Eif"; */
+"qoP-33-Eif.text" = "Sterge Buget";
+
+/* Class = "UILabel"; text = "sumLabel"; ObjectID = "teE-LI-Rja"; */
+"teE-LI-Rja.text" = "sumLabel";
+
+/* Class = "UILabel"; text = "Nu exista categorii"; ObjectID = "uYq-zY-Vnc"; */
+"uYq-zY-Vnc.text" = "Nu exista categorii";
+
+/* Class = "UILabel"; text = "Vin"; ObjectID = "vg3-zF-FJs"; */
+"vg3-zF-FJs.text" = "Vin";
+
+/* Class = "UILabel"; text = "Title"; ObjectID = "x5Q-fp-zHK"; */
+"x5Q-fp-zHK.text" = "Title";
+
+/* Class = "UILabel"; text = "Istoric"; ObjectID = "ylW-FK-Eui"; */
+"ylW-FK-Eui.text" = "Istoric";
+
+/* Class = "UILabel"; text = "Adauga categorie"; ObjectID = "zHh-eJ-Ff9"; */
+"zHh-eJ-Ff9.text" = "Adauga categorie";
+
+/* Class = "UILabel"; text = "Joi"; ObjectID = "zL5-Oa-olU"; */
+"zL5-Oa-olU.text" = "Joi";
+
+/* Suma invalida alerta: */
+"invalidSum" = "Suma invalida";
+
+/* Adauga buget/plata/anuleaza alerta: */
+"addBudgetAlert" = "Adauga Buget";
+"addExpenseAlert" = "Adauga plata";
+"cancelAlert" = "Anuleaza";
+
+/* Alerta filtre: */
+"noCategoryAlert" = "Nicio categorie introdusa";
+"categoryExists" = "Categoria %@ exista deja.";
+
+
+/* Sterge buget: */
+"eraseBudgetTitle" = "Stergere Buget";
+"eraseBudgetMsg" = "Odata cu stergerea bugetului, datele nu mai pot fi recuperate. Apasa Da pentru confirmare.";
+"yesAns" = "Da";
+"noAns" = "Nu";
+"succesMsg" = "Buget sters cu succes!";
+
+/* Perioada nu a fost gasita : */
+"noEntriesFound" = "Nicio intrare gasita pentru data aleasa";
+

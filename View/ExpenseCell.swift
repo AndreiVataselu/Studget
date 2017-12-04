@@ -27,7 +27,7 @@ class ExpenseCell: SwipeTableViewCell {
         numberFormatter.numberStyle = NumberFormatter.Style.decimal
         let formattedNumber = numberFormatter.string(from: NSNumber(value:number))
         
-        return ("\(formattedNumber!) RON")
+        return ("\(formattedNumber!) \(Locale.current.currencySymbol!)")
         
     }
     

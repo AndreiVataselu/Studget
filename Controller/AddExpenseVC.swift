@@ -28,6 +28,8 @@ fileprivate func > <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
     }
 }
 
+var bindAddExpenseBtn = true
+
 class AddExpenseVC: UIViewController, UITextFieldDelegate {
     
     var percentDrivenInteractiveTransition: UIPercentDrivenInteractiveTransition!
@@ -51,6 +53,8 @@ class AddExpenseVC: UIViewController, UITextFieldDelegate {
         tableView.delegate = self
         tableView.dataSource = self
         
+        bindAddExpenseBtn = true
+        
         let tvFooter = UIView()
         tableView.tableFooterView = tvFooter
         tableView.isScrollEnabled = false
@@ -63,14 +67,19 @@ class AddExpenseVC: UIViewController, UITextFieldDelegate {
             userBudgetLabel.text = replaceLabel(number: userMoney[userMoney.count - 1].userMoney)
         }
         
-        self.addBtn.bindToKeyboard()
+        addBtn.bindToKeyboard()
 
         addGesture()
     }
     
     
     override func viewDidAppear(_ animated: Bool) {
+        if !bindAddExpenseBtn {
+            print("BAEB")
+        btc = bottomConstraint
         addBtn.bindToKeyboard()
+        }
+        tableView.reloadData()
     }
     
     func addGesture() {
@@ -105,12 +114,15 @@ class AddExpenseVC: UIViewController, UITextFieldDelegate {
             
             // Continue if drag more than 50% of screen width or velocity is higher than 1000
             if percent > 0.5 || velocity > 1000 {
+                isCellSelected = []
                 percentDrivenInteractiveTransition.finish()
             } else {
+                bindAddExpenseBtn = true
                 percentDrivenInteractiveTransition.cancel()
             }
             
         case .cancelled, .failed:
+            bindAddExpenseBtn = true
             percentDrivenInteractiveTransition.cancel()
             
         default:
@@ -119,14 +131,14 @@ class AddExpenseVC: UIViewController, UITextFieldDelegate {
     }
     
     @IBAction func backBtnPressed(_ sender: Any) {
-        print("SENDER: add expense")
+        isCellSelected = []
         navigationController?.popViewController(animated: true)
     }
     
     @IBAction func addBtnPressed(_ sender: Any) {
         var descriptionCheck = descriptionField.text!
         if descriptionCheck == "" {
-            descriptionCheck = "Plata noua"
+            descriptionCheck = NSLocalizedString("emptyExpenseDesc", comment: "")
         }
         
         let sumFieldDecimal = sumField.text?.replacingOccurrences(of: ",", with: ".", options: .literal, range: nil)
@@ -135,16 +147,32 @@ class AddExpenseVC: UIViewController, UITextFieldDelegate {
         if sumFieldDecimal == "" {
             sumInvalidAlert()
         } else {
+            
+            if userMoney.count == 0 {
+                self.saveMoney(userMoney: (sumField.text! as NSString).doubleValue , completion: { (_) in
+                    
+                })
+            } else {
+                
+            
             userMoney[userMoney.count-1].userMoney -= (sumFieldDecimal! as NSString).doubleValue
             self.saveMoney(userMoney: userMoney[userMoney.count-1].userMoney, completion: { (complete) in
             })
-            self.save(sumText: sumFieldDecimal! , dataDescription: descriptionCheck, dataColor: red){ complete in
+            }
+            
+            var selectedC : Categories? = nil
+            for i in 0..<isCellSelected.count {
+                if isCellSelected[i]{
+                    selectedC = userCategories[i]
+                }
+            }
+            
+            self.save(sumText: sumFieldDecimal! , dataDescription: descriptionCheck, dataColor: red, category: selectedC, type: "expense" ){ complete in
             if complete {
-                
+                isCellSelected = []
                 navigationController?.popViewController(animated: true)
             }
         }
-
     }
     
 }
@@ -194,7 +222,19 @@ extension AddExpenseVC : UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "PickCategoryCell") as! PickCategoryCell
-        cell.labelView.text = "Categorie (Optional)"
+        
+        var selectedCell : String = ""
+        for i in 0..<isCellSelected.count {
+            if isCellSelected[i]{
+                selectedCell = userCategories[i].categoryName!
+            }
+        }
+        
+        if selectedCell != "" {
+            cell.labelView.text = selectedCell
+        } else {
+        cell.labelView.text = NSLocalizedString("optionalCat", comment: "")
+        }
         
         return cell
     }
@@ -206,6 +246,7 @@ extension AddExpenseVC : UITableViewDataSource, UITableViewDelegate {
             
         case 0:
         
+        bindAddExpenseBtn = false
         self.addBtn.removeBind()
         let selectCatVC = storyboard?.instantiateViewController(withIdentifier: "SelectCategoryVC")
         navigationController?.pushViewController(selectCatVC!, animated: true)

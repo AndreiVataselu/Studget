@@ -23,6 +23,8 @@
 		F13D0D8B1FBA328700C4FBB8 /* CategoriesVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F13D0D8A1FBA328700C4FBB8 /* CategoriesVC.swift */; };
 		F13D0D8D1FBA374D00C4FBB8 /* AddCategoryVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F13D0D8C1FBA374D00C4FBB8 /* AddCategoryVC.swift */; };
 		F1882FA61FBAFC3B00954334 /* CategoryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1882FA51FBAFC3B00954334 /* CategoryCell.swift */; };
+		F1A507611FC1BDB900665757 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = F1A507631FC1BDB900665757 /* Localizable.strings */; };
+		F1A507671FC1BE8700665757 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = F1A507691FC1BE8700665757 /* Localizable.strings */; };
 		F1ACCADB1FBB79BD00AC9FAE /* PickCategoryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1ACCADA1FBB79BD00AC9FAE /* PickCategoryCell.swift */; };
 		F1ACCADD1FBB80C600AC9FAE /* SelectCategoryVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1ACCADC1FBB80C600AC9FAE /* SelectCategoryVC.swift */; };
 		F1B358381F9015AF00A75B4F /* MenuVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1B358371F9015AF00A75B4F /* MenuVC.swift */; };
@@ -35,6 +37,8 @@
 		F1DE5DB81F8575D700D264F5 /* UIViewControllerExt.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1DE5DB71F8575D700D264F5 /* UIViewControllerExt.swift */; };
 		F1DE5DBA1F858B8E00D264F5 /* UIViewExt.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1DE5DB91F858B8E00D264F5 /* UIViewExt.swift */; };
 		F1DECC421FA79D9A00B9AE7B /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = F1DECC411FA79D9900B9AE7B /* GoogleService-Info.plist */; };
+		F1EA6ED41FBF273C00810D43 /* DetailVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1EA6ED31FBF273C00810D43 /* DetailVC.swift */; };
+		F1F0FBFE1FBCDF2D009D04BD /* FilterVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1F0FBFD1FBCDF2D009D04BD /* FilterVC.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -59,7 +63,11 @@
 		F13131E61F8EA44F00BFCF41 /* NSLayoutConstraintsExt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NSLayoutConstraintsExt.swift; sourceTree = "<group>"; };
 		F13D0D8A1FBA328700C4FBB8 /* CategoriesVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoriesVC.swift; sourceTree = "<group>"; };
 		F13D0D8C1FBA374D00C4FBB8 /* AddCategoryVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddCategoryVC.swift; sourceTree = "<group>"; };
+		F167AB801FC0FE6600395BF5 /* ro */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ro; path = ro.lproj/Main.strings; sourceTree = "<group>"; };
 		F1882FA51FBAFC3B00954334 /* CategoryCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryCell.swift; sourceTree = "<group>"; };
+		F1A5075E1FC1B69B00665757 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Main.strings; sourceTree = "<group>"; };
+		F1A507621FC1BDB900665757 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
+		F1A507681FC1BE8700665757 /* ro */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ro; path = ro.lproj/Localizable.strings; sourceTree = "<group>"; };
 		F1ACCADA1FBB79BD00AC9FAE /* PickCategoryCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PickCategoryCell.swift; sourceTree = "<group>"; };
 		F1ACCADC1FBB80C600AC9FAE /* SelectCategoryVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectCategoryVC.swift; sourceTree = "<group>"; };
 		F1B358371F9015AF00A75B4F /* MenuVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuVC.swift; sourceTree = "<group>"; };
@@ -71,6 +79,8 @@
 		F1DE5DB71F8575D700D264F5 /* UIViewControllerExt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewControllerExt.swift; sourceTree = "<group>"; };
 		F1DE5DB91F858B8E00D264F5 /* UIViewExt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewExt.swift; sourceTree = "<group>"; };
 		F1DECC411FA79D9900B9AE7B /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		F1EA6ED31FBF273C00810D43 /* DetailVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailVC.swift; sourceTree = "<group>"; };
+		F1F0FBFD1FBCDF2D009D04BD /* FilterVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterVC.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -105,6 +115,7 @@
 		F116F2CD1F838B640038F163 = {
 			isa = PBXGroup;
 			children = (
+				F1A5076A1FC1BE9E00665757 /* Localizable */,
 				F1B7A2651FA7700300B410A5 /* Admob */,
 				F1DE5DB61F8575BC00D264F5 /* Extensions */,
 				F1DE5DB11F85703700D264F5 /* Controller */,
@@ -127,6 +138,8 @@
 		F116F2D81F838B640038F163 /* Expense Manager */ = {
 			isa = PBXGroup;
 			children = (
+				F1A507631FC1BDB900665757 /* Localizable.strings */,
+				F1A507691FC1BE8700665757 /* Localizable.strings */,
 				F10B34361FB5E90C0075BD85 /* Expense Manager.entitlements */,
 				F12CE5171FB3B49200247F87 /* SlideAnimatedTransitioning.swift */,
 				F116F2D91F838B650038F163 /* AppDelegate.swift */,
@@ -153,6 +166,13 @@
 			path = View;
 			sourceTree = "<group>";
 		};
+		F1A5076A1FC1BE9E00665757 /* Localizable */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Localizable;
+			sourceTree = "<group>";
+		};
 		F1B7A2651FA7700300B410A5 /* Admob */ = {
 			isa = PBXGroup;
 			children = (
@@ -173,6 +193,8 @@
 				F12CE5191FB3B86D00247F87 /* FirstNavigation.swift */,
 				F13D0D8A1FBA328700C4FBB8 /* CategoriesVC.swift */,
 				F1ACCADC1FBB80C600AC9FAE /* SelectCategoryVC.swift */,
+				F1F0FBFD1FBCDF2D009D04BD /* FilterVC.swift */,
+				F1EA6ED31FBF273C00810D43 /* DetailVC.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -246,7 +268,6 @@
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
-				en,
 				Base,
 			);
 			mainGroup = F116F2CD1F838B640038F163;
@@ -264,7 +285,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F1A507671FC1BE8700665757 /* Localizable.strings in Resources */,
 				F116F2E41F838B650038F163 /* Assets.xcassets in Resources */,
+				F1A507611FC1BDB900665757 /* Localizable.strings in Resources */,
 				F116F2DF1F838B650038F163 /* Main.storyboard in Resources */,
 				F1DECC421FA79D9A00B9AE7B /* GoogleService-Info.plist in Resources */,
 			);
@@ -349,10 +372,12 @@
 				F1DE5DB81F8575D700D264F5 /* UIViewControllerExt.swift in Sources */,
 				F1ACCADD1FBB80C600AC9FAE /* SelectCategoryVC.swift in Sources */,
 				F130C8F41F8FE673005A4A41 /* StringExt.swift in Sources */,
+				F1F0FBFE1FBCDF2D009D04BD /* FilterVC.swift in Sources */,
 				F13D0D8D1FBA374D00C4FBB8 /* AddCategoryVC.swift in Sources */,
 				F12CE5181FB3B49200247F87 /* SlideAnimatedTransitioning.swift in Sources */,
 				F13131E71F8EA44F00BFCF41 /* NSLayoutConstraintsExt.swift in Sources */,
 				F1B358381F9015AF00A75B4F /* MenuVC.swift in Sources */,
+				F1EA6ED41FBF273C00810D43 /* DetailVC.swift in Sources */,
 				F1DE11B81F8CB9FC009B082F /* ExpenseCell.swift in Sources */,
 				F1DE5DB51F85706300D264F5 /* AddExpenseVC.swift in Sources */,
 				F116F2E21F838B650038F163 /* Expense_Manager.xcdatamodeld in Sources */,
@@ -373,8 +398,26 @@
 			isa = PBXVariantGroup;
 			children = (
 				F116F2DE1F838B650038F163 /* Base */,
+				F167AB801FC0FE6600395BF5 /* ro */,
+				F1A5075E1FC1B69B00665757 /* en */,
 			);
 			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		F1A507631FC1BDB900665757 /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				F1A507621FC1BDB900665757 /* en */,
+			);
+			name = Localizable.strings;
+			sourceTree = "<group>";
+		};
+		F1A507691FC1BE8700665757 /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				F1A507681FC1BE8700665757 /* ro */,
+			);
+			name = Localizable.strings;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
@@ -384,6 +427,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
@@ -441,6 +485,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";

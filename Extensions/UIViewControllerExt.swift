@@ -76,7 +76,7 @@ import UIKit
         }
     }
     
-    func save(sumText: String, dataDescription: String, dataColor: UIColor, completion: (_ finished: Bool) -> ()) {
+    func save(sumText: String, dataDescription: String, dataColor: UIColor, category: Categories?, type: String, completion: (_ finished: Bool) -> ()) {
         let budget = NSEntityDescription.insertNewObject(forEntityName: "Budget", into: managedObjectContext!) as! Budget
         
         budget.dataSum = sumText
@@ -84,6 +84,11 @@ import UIKit
         budget.dataColor = dataColor
         budget.dateSubmitted = Date()
         budget.dateSection = formatDate(date: Date())
+        budget.type = type
+        
+        if let cat = category {
+            budget.category = cat
+        }
 
         
         do{
@@ -113,10 +118,15 @@ import UIKit
     }
     
     func sumInvalidAlert() {
-        let sumAlert = UIAlertController(title: "Suma invalida", message: nil, preferredStyle: .alert)
+        
+        let titleAlert = NSLocalizedString("invalidSum", comment: "")
+        
+        let sumAlert = UIAlertController(title: titleAlert, message: nil, preferredStyle: .alert)
         sumAlert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
         present(sumAlert, animated: true, completion: nil)
         }
+    
+    // MARK:- Localized here
     
     func replaceLabel (number: Double) -> String  {
         
@@ -124,15 +134,34 @@ import UIKit
         numberFormatter.numberStyle = NumberFormatter.Style.decimal
         let formattedNumber = numberFormatter.string(from: NSNumber(value:number))
         
-        return ("\(formattedNumber!) RON")
+        return ("\(formattedNumber!) \(Locale.current.currencySymbol!)")
     }
     
     func formatDate (date: Date) -> String {
         let dateFormatter = DateFormatter()
-        dateFormatter.locale = Locale(identifier: "ro")
+        dateFormatter.locale = Calendar.current.locale
         dateFormatter.dateFormat = "dd.MM.yyyy"
         
         return dateFormatter.string(from: date)
+    }
+    
+    func showDetailedExpense(object: Budget){        
+        var catString = NSLocalizedString("noCategory", comment: "")
+        
+        detailData = []
+        
+        if let categoryExists = object.category {
+            catString = categoryExists.categoryName!
+        }
+        
+        detailData.append(object.dataSum!)
+        detailData.append(object.dataDescription!)
+        detailData.append(catString)
+        detailData.append(object.dateSection!)
+        detailData.append(object.type!)
+        
+        let detailVC = storyboard?.instantiateViewController(withIdentifier: "DetailVC")
+        navigationController?.pushViewController(detailVC!, animated: true)
     }
 }
     

@@ -94,18 +94,21 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, performActionFor shortcutItem: UIApplicationShortcutItem, completionHandler: @escaping (Bool) -> Void) {
         self.window = UIWindow(frame: UIScreen.main.bounds)
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        let initialViewController = storyboard.instantiateViewController(withIdentifier: "MainVC")
+        let initialViewController = storyboard.instantiateViewController(withIdentifier: "FirstNavigation") as! UINavigationController
+        
         self.window?.rootViewController = initialViewController
         self.window?.makeKeyAndVisible()
 
         if shortcutItem.type == "com.andreivataselu.Studget.add" {
             let createAddBudgetVC = storyboard.instantiateViewController(withIdentifier: "AddBudgetVC")
-            self.window?.rootViewController?.presentViewController(createAddBudgetVC)
+            
+            initialViewController.pushViewController(createAddBudgetVC, animated: false)
+            
         } else if shortcutItem.type == "com.andreivataselu.Studget.expense" {
             
             let createAddExpenseVC = storyboard.instantiateViewController(withIdentifier: "AddExpenseVC")
-            self.window?.rootViewController?.presentViewController(createAddExpenseVC)
-            
+
+            initialViewController.pushViewController(createAddExpenseVC, animated: false)
         }
     }
 

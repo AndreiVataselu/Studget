@@ -12,6 +12,7 @@ import CoreData
 import SwipeCellKit
 import JTAppleCalendar
 import GoogleMobileAds
+import QuartzCore
 
 let green = UIColor(red:0.00, green:0.62, blue:0.45, alpha:1.0)
 let red = UIColor(red:0.95, green:0.34, blue:0.34, alpha:1.0)
@@ -20,11 +21,11 @@ var userMoney : [UserMoney] = []
 var managedObjectContext: NSManagedObjectContext? = appDelegate?.persistentContainer.viewContext
 var budgetDeleted : Bool = false
 var _fetchedResultsController: NSFetchedResultsController<Budget>? = nil
+var detailData : [String] = []
 
 class ViewController: UIViewController, NSFetchedResultsControllerDelegate,GADBannerViewDelegate {
 
     
-    @IBOutlet weak var sumTextField: UITextField!
     @IBOutlet weak var userBudgetLabel: UILabel!
     @IBOutlet var tap: UITapGestureRecognizer!
     @IBOutlet weak var topView: UIView!
@@ -32,6 +33,7 @@ class ViewController: UIViewController, NSFetchedResultsControllerDelegate,GADBa
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var moreBtn: UIButton!
     @IBOutlet weak var bannerView : GADBannerView!
+    @IBOutlet weak var emptyBudgetLabel : UILabel!
 
     @IBOutlet weak var tableViewBottomConstraint: NSLayoutConstraint!
     
@@ -44,19 +46,33 @@ class ViewController: UIViewController, NSFetchedResultsControllerDelegate,GADBa
         return fetchedResultsController.object(at: indexPath) as Budget
     }
     
+    func isAppAlreadyLaunchedOnce()->Bool{
+        let defaults = UserDefaults.standard
+        
+        if let isAppAlreadyLaunchedOnce = defaults.string(forKey: "isAppAlreadyLaunchedOnce"){
+            return true
+        }else{
+            defaults.set(true, forKey: "isAppAlreadyLaunchedOnce")
+            return false
+        }
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
         self.hideKeyboard()
         
+        print(isAppAlreadyLaunchedOnce())
         fetchCoreDataObject()
+        fetchCategories { (_) in}
+        
         tableView.delegate = self
         tableView.dataSource = self
         self.tableView.tableFooterView = UIView()
         
+
         bannerView.adSize = kGADAdSizeSmartBannerPortrait
         
-//        bannerView.adUnitID = "ca-app-pub-3588787712275306/6954370602"
+        bannerView.adUnitID = "ca-app-pub-3588787712275306/6954370602"
         bannerView.rootViewController = self
         bannerView.delegate = self
         bannerView.load(GADRequest())
@@ -86,14 +102,12 @@ class ViewController: UIViewController, NSFetchedResultsControllerDelegate,GADBa
                 if ((fetchedResultsController.fetchedObjects?.count)! > 0) {
                     userBudgetLabel.text = replaceLabel(number: userMoney[userMoney.count - 1].userMoney)
                     tableView.isHidden = false
-                    plusButton.isHidden = false
-                    moreBtn.isHidden = false
+                    
                     tableView.reloadData()
                 } else {
                     tableView.isHidden = true
-                    userBudgetLabel.text = "Bugetul tau"
-                    plusButton.isHidden = true
-                    moreBtn.isHidden = true
+                    userBudgetLabel.text = "Studget"
+                    emptyBudgetLabel.text = NSLocalizedString("emptyBudgetText", comment: "")
                 }
             }
         }
@@ -160,33 +174,15 @@ class ViewController: UIViewController, NSFetchedResultsControllerDelegate,GADBa
         // Dispose of any resources that can be recreated.
     }
 
-    @IBAction func initialAddButtonPressed(_ sender: Any) {
-        if sumTextField.text != "" {
-            self.saveMoney(userMoney: (sumTextField.text! as NSString).doubleValue, completion: { (complete) in
-                
-            })
-            self.save(sumText: sumTextField.text! , dataDescription: "Buget initial", dataColor: green) {
-                complete in
-                if complete {
-                    tableView.isHidden = false
-                }
-            }
-            userBudgetLabel.text = "\(sumTextField.text!) RON"
-            self.fetchCoreDataObject()
-            tableView.reloadData()
-        } else {
-            sumInvalidAlert()
-        }
-        self.dismissKeyboard()
-        sumTextField.text = ""
-    }
     @IBAction func plusButtonPressed(_ sender: Any) {
         
         let plusController = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
         
-        let addBudgetAction = UIAlertAction(title: "Adauga buget", style: .default) {
+        let addBudgetAction = UIAlertAction(title: NSLocalizedString("addBudgetAlert", comment: ""), style: .default) {
             (action) -> Void in
 
+            //MARK:- Localized aici
+            
             guard let createAddBudgetVC = self.storyboard?.instantiateViewController(withIdentifier: "AddBudgetVC") else { return }
 //            self.presentViewController(createAddBudgetVC)
             if let navigator = self.navigationController {
@@ -194,7 +190,7 @@ class ViewController: UIViewController, NSFetchedResultsControllerDelegate,GADBa
             }
         }
         
-        let addExpenseAction = UIAlertAction(title: "Adauga plata", style: .default) {
+        let addExpenseAction = UIAlertAction(title: NSLocalizedString("addExpenseAlert", comment: ""), style: .default) {
             (action) -> Void in
 
             guard let createAddExpenseVC = self.storyboard?.instantiateViewController(withIdentifier: "AddExpenseVC") else { return }
@@ -205,7 +201,7 @@ class ViewController: UIViewController, NSFetchedResultsControllerDelegate,GADBa
             
         }
         
-        let cancelAction = UIAlertAction(title: "Anuleaza", style: .cancel, handler: nil)
+        let cancelAction = UIAlertAction(title: NSLocalizedString("cancelAlert", comment: ""), style: .cancel, handler: nil)
         
         plusController.addAction(addBudgetAction)
         plusController.addAction(addExpenseAction)
@@ -276,7 +272,7 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource,SwipeTableV
 
         guard orientation == .right else {return nil}
         
-        let deleteAction = SwipeAction(style: .destructive, title: "Sterge") { (action, indexPath) in
+        let deleteAction = SwipeAction(style: .destructive, title: NSLocalizedString("deleteCell", comment: "")) { (action, indexPath) in
             
             self.cancelCell(color: self.getUserBudgetAtIndexPath(indexPath: indexPath).dataColor as! UIColor, atIndexPath: indexPath)
             self.removeCell(atIndexPath: indexPath)
@@ -297,13 +293,22 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource,SwipeTableV
         return 1
     }
     
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+        let object = fetchedResultsController.object(at: indexPath)
+        
+        showDetailedExpense(object: object)        
+        tableView.deselectRow(at: indexPath, animated: true)
+    }
+    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "expenseCell") as? ExpenseCell else { return UITableViewCell() }
         print("indexPathRow: \(indexPath.row) | indexPathSection: \(indexPath.section)")
         let budget = fetchedResultsController.object(at: indexPath) as Budget
+        
         cell.delegate = self
         cell.configureCell(budget: budget)
-      
+        
         return cell
     }
     

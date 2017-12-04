@@ -1,0 +1,56 @@
+/* 
+  Localizable.strings
+  Expense Manager
+
+  Created by Andrei Vataselu on 11/19/17.
+  Copyright © 2017 Andrei Vataselu. All rights reserved.
+*/
+
+/* Suma invalida alerta: */
+"invalidSum" = "Suma invalida";
+
+/* Adauga buget/plata/anuleaza alerta: */
+"addBudgetAlert" = "Adauga Buget";
+"addExpenseAlert" = "Adauga Plata";
+"cancelAlert" = "Anuleaza";
+
+/* Alerta filtre: */
+"noCategoryAlert" = "Nicio categorie introdusa";
+"categoryExists" = "Categoria %@ exista deja.";
+
+
+/* Sterge buget: */
+"eraseBudgetTitle" = "Stergere Buget";
+"eraseBudgetMsg" = "Odata cu stergerea bugetului, datele nu mai pot fi recuperate. Apasa Da pentru confirmare.";
+"yesAns" = "Da";
+"noAns" = "Nu";
+"succesMsg" = "Buget sters cu succes!";
+
+/* Perioada nu a fost gasita : */
+"noEntriesFound" = "Nicio intrare gasita pentru data aleasa";
+
+/*AddExpense categorie :*/
+"optionalCat" = "Categorie (optional)";
+
+/*Sterge cellula :*/
+"deleteCell" = "Sterge";
+
+/*Descrieri goale:*/
+"emptyBudgetDesc" = "Buget adaugat";
+"emptyExpenseDesc" = "Plata adaugata";
+
+"selectRange" = "Selecteaza o perioada";
+
+"initialBudget" = "Buget initial";
+
+"searchBarPlaceholder" = "Search";
+
+"entryType" = "Tip intrare";
+"budgetType" = "Buget";
+"expenseType" = "Plata";
+"categoriesToPick" = "Categorii (optional)";
+
+"noCategory" = "Fara categorie";
+
+"emptyBudgetText" = "Bugetul tau este gol";
+

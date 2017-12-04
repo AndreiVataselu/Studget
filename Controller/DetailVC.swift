@@ -1,8 +1,8 @@
 //
-//  AddBudgetVC.swift
+//  DetailVC.swift
 //  Expense Manager
 //
-//  Created by Andrei Vataselu on 10/4/17.
+//  Created by Andrei Vataselu on 11/17/17.
 //  Copyright © 2017 Andrei Vataselu. All rights reserved.
 //
 
@@ -28,35 +28,38 @@ fileprivate func > <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
     }
 }
 
-var btc = NSLayoutConstraint()
-
-class AddBudgetVC: UIViewController {
-
-    @IBOutlet weak var userBudgetLabel: UILabel!
-    @IBOutlet weak var sumText: UITextField!
-    @IBOutlet weak var addBtn: UIButton!
-    @IBOutlet weak var descriptionText: UITextField!
+class DetailVC: UIViewController {
     
-    @IBOutlet weak var bottomConstraint: NSLayoutConstraint!
+    @IBOutlet weak var sumText : UILabel!
+    @IBOutlet weak var descriptionText : UILabel!
+    @IBOutlet weak var categoryText : UILabel!
+    @IBOutlet weak var dateText : UILabel!
+    @IBOutlet weak var typeLabel: UILabel!
     
-    var percentDrivenInteractiveTransition: UIPercentDrivenInteractiveTransition!
     var panGestureRecognizer: UIPanGestureRecognizer!
-    
-    
+    var percentDrivenInteractiveTransition: UIPercentDrivenInteractiveTransition!
+
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.hideKeyboard()
+        sumText.text = "\(detailData[0]) \(Locale.current.currencySymbol!)"
+        descriptionText.text = detailData[1]
+        categoryText.text = detailData[2]
+        dateText.text = detailData[3]
         
-        btc = bottomConstraint
-        
-        if userMoney.count > 0 {
-            userBudgetLabel.text = replaceLabel(number: userMoney[userMoney.count - 1].userMoney)
+        if detailData[4] == "budget" {
+            typeLabel.text = NSLocalizedString("budgetType", comment: "")
+            sumText.textColor = green
+        } else {
+            typeLabel.text = NSLocalizedString("expenseType", comment: "")
+            sumText.textColor = red
         }
-                
-        addBtn.bindToKeyboard()
-        addBtn.translatesAutoresizingMaskIntoConstraints = false
         
         addGesture()
+    
+    }
+    
+    @IBAction func backBtnPressed(_ sender: Any){
+        navigationController?.popViewController(animated: true)
     }
     
     func addGesture() {
@@ -64,9 +67,8 @@ class AddBudgetVC: UIViewController {
         guard navigationController?.viewControllers.count > 1 else {
             return
         }
-
         
-        panGestureRecognizer = UIPanGestureRecognizer(target: self, action: #selector(AddBudgetVC.handlePanGesture(_:)))
+        panGestureRecognizer = UIPanGestureRecognizer(target: self, action: #selector(DetailVC.handlePanGesture(_:)))
         self.view.addGestureRecognizer(panGestureRecognizer)
     }
     
@@ -101,46 +103,16 @@ class AddBudgetVC: UIViewController {
         default:
             break
         }
-    }
-    
-    @IBAction func backBtnPressed(_ sender: Any) {
-        print("SENDER: add budget")
-        navigationController?.popViewController(animated: true)
-    }
-    
-    @IBAction func addBtnPressed(_ sender: Any) {
         
-        var descriptionCheck = descriptionText.text!
-        if descriptionCheck == "" {
-            descriptionCheck = NSLocalizedString("emptyBudgetDesc", comment: "")
-        }
-        
-        if sumText.text == ""  {
-           sumInvalidAlert()
-        } else {
-            
-            if userMoney.count == 0 {
-                self.saveMoney(userMoney: (sumText.text! as NSString).doubleValue , completion: { (_) in
-                    
-                })
-            } else {
-            
-            userMoney[userMoney.count - 1 ].userMoney += (sumText.text! as NSString).doubleValue
-            
-            self.saveMoney(userMoney: userMoney[userMoney.count - 1].userMoney, completion: { (complete) in
-            })
-            }
-            self.save(sumText: sumText.text! , dataDescription: descriptionCheck, dataColor: green, category: nil, type: "budget") { complete in
-            if complete {
-                navigationController?.popViewController(animated: true)
-            }
-        }
     }
-    
-}
+
+    override func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
+        // Dispose of any resources that can be recreated.
+    }
 }
 
-extension AddBudgetVC : UINavigationControllerDelegate {
+extension DetailVC: UINavigationControllerDelegate {
     
     func navigationController(_ navigationController: UINavigationController, animationControllerFor operation: UINavigationControllerOperation, from fromVC: UIViewController, to toVC: UIViewController) -> UIViewControllerAnimatedTransitioning? {
         
@@ -160,4 +132,5 @@ extension AddBudgetVC : UINavigationControllerDelegate {
         
         return percentDrivenInteractiveTransition
     }
+    
 }

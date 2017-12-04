@@ -328,7 +328,7 @@ class CalendarVC: UIViewController {
                 navigator.pushViewController(showPeriodVC, animated: true)
             }
         } else {
-            let noObjectAlert = UIAlertController(title: "Nicio intrare gasita pentru data aleasa", message: nil, preferredStyle: .alert)
+            let noObjectAlert = UIAlertController(title: NSLocalizedString("noEntriesFound", comment: ""), message: nil, preferredStyle: .alert)
             let okAction = UIAlertAction(title: "OK", style: .default, handler: nil)
             noObjectAlert.addAction(okAction)
             
@@ -349,7 +349,7 @@ extension CalendarVC: JTAppleCalendarViewDataSource {
     func configureCalendar(_ calendar: JTAppleCalendarView) -> ConfigurationParameters {
         formatter.dateFormat = "yyyy MM dd"
         formatter.timeZone = Calendar.current.timeZone
-        formatter.locale = Locale(identifier: "ro")
+        formatter.locale = Calendar.current.locale
         
         let startDate = formatter.date(from: "2017 01 01")
         let endDate = formatter.date(from: "2099 12 31")
@@ -429,7 +429,7 @@ extension CalendarVC: JTAppleCalendarViewDelegate {
             calendarView.deselectDates(from: dateToDeselect!, to: endDate!, triggerSelectionDelegate: false)
                 endDate = nil
                 dismissQuickShow()
-                headerLabel.text = "Selecteaza o perioada"
+                headerLabel.text = NSLocalizedString("selectRange", comment: "")
                 okButtonOutlet.isHidden = true
                 objectExistanceSwitch = false
             }
@@ -454,7 +454,7 @@ extension CalendarVC: JTAppleCalendarViewDelegate {
             dismissQuickShow()
             endDate = nil
             firstDate = nil
-            headerLabel.text = "Selecteaza o perioada"
+            headerLabel.text = NSLocalizedString("selectRange", comment: "")
             okButtonOutlet.isHidden = true
             objectExistanceSwitch = false
             print(objectExistanceSwitch)
@@ -463,7 +463,7 @@ extension CalendarVC: JTAppleCalendarViewDelegate {
             dismissQuickShow()
         }
         
-        headerLabel.text = "Selecteaza o perioada"
+        headerLabel.text = NSLocalizedString("selectRange", comment: "")
         okButtonOutlet.isHidden = true
 
         handleCellSelected(view: cell, cellState: cellState)

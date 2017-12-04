@@ -9,6 +9,7 @@
 import UIKit
 import CoreData
 import GoogleMobileAds
+import QuartzCore
 
 fileprivate func < <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
     switch (lhs, rhs) {
@@ -32,6 +33,8 @@ fileprivate func > <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
 
 var filteredItems = [Budget]()
 
+var compoundPredicate : [NSPredicate] = []
+
 class PeriodExpenses: UIViewController, NSFetchedResultsControllerDelegate, GADBannerViewDelegate{
 
     @IBOutlet weak var tableView: UITableView!
@@ -39,6 +42,10 @@ class PeriodExpenses: UIViewController, NSFetchedResultsControllerDelegate, GADB
     @IBOutlet var bannerView: GADBannerView!
     @IBOutlet weak var noResultsFoundLabel : UILabel!
     
+    
+    @IBOutlet weak var filterButton : UIButton!
+    @IBOutlet weak var cancelButton : UIButton!
+        
     var percentDrivenInteractiveTransition: UIPercentDrivenInteractiveTransition!
     var panGestureRecognizer: UIPanGestureRecognizer!
     var searchBar = UISearchBar()
@@ -48,29 +55,44 @@ class PeriodExpenses: UIViewController, NSFetchedResultsControllerDelegate, GADB
     override func viewDidLoad() {
         super.viewDidLoad()
         self.tableView.tableFooterView = UIView()
+
         tableView.delegate = self
         tableView.dataSource = self
         periodLabel.text = periodString
         bannerView.adSize = kGADAdSizeSmartBannerPortrait
 
-//        bannerView.adUnitID = "ca-app-pub-3588787712275306/8074266186"
+        bannerView.adUnitID = "ca-app-pub-3588787712275306/8074266186"
         bannerView.rootViewController = self
         bannerView.delegate = self
         bannerView.load(GADRequest())
         
         searchBar.frame = CGRect(x: 0, y: 0, width: tableView.frame.width, height: 45)
-        searchBar.barTintColor = UIColor(red:0.54, green:0.77, blue:0.80, alpha:1.0)
-        searchBar.placeholder = "Cauta cheltuieli"
-        searchBar.backgroundImage = #imageLiteral(resourceName: "searchbarback")
-        
+        searchBar.barTintColor = UIColor(red:0.27, green:0.76, blue:0.80, alpha:1.0)
+        searchBar.placeholder = NSLocalizedString("searchBarPlaceholder", comment: "")
+        searchBar.backgroundImage = #imageLiteral(resourceName: "searchBarr")
         searchBar.delegate = self
         
+        var frame = self.tableView.bounds
+        frame.origin.y = -frame.size.height
+        frame.size.height = frame.size.height
+        frame.size.width = UIScreen.main.bounds.size.width
+        let blueView = UIView(frame: frame)
+        blueView.backgroundColor = UIColor(red:0.27, green:0.76, blue:0.80, alpha:1.0)
+        self.tableView.addSubview(blueView)
+
         tableView.tableHeaderView = searchBar
         tableView.setContentOffset(CGPoint.init(x: 0, y: 44), animated: true)
 
         addGesture()
 
     }
+    
+    
+    override func viewDidAppear(_ animated: Bool) {
+        try! fetchedResultsController.performFetch()
+        tableView.reloadData()
+    }
+    
     
     func searchBarIsEmpty() -> Bool {
         return searchBar.text?.isEmpty ?? true
@@ -137,7 +159,8 @@ class PeriodExpenses: UIViewController, NSFetchedResultsControllerDelegate, GADB
             NSFetchedResultsController<NSFetchRequestResult>.deleteCache(withName: "cachePeriod")
 
             
-             let predicate = NSPredicate(format: "(dateSubmitted >= %@) AND (dateSubmitted <= %@)", date1 as NSDate, date2 as NSDate)
+            let predicate = NSPredicate(format: "(dateSubmitted >= %@) AND (dateSubmitted <= %@)", date1 as NSDate, date2 as NSDate)
+            andPredicatesArray.append(predicate)
             
             let fetchRequest = NSFetchRequest<Budget>(entityName: "Budget")
             
@@ -147,7 +170,26 @@ class PeriodExpenses: UIViewController, NSFetchedResultsControllerDelegate, GADB
             // Edit the sort key as appropriate.
             let sortDescriptor = NSSortDescriptor(key: "dateSubmitted" , ascending: false)
             
-            fetchRequest.predicate = predicate
+            let compoundP = NSCompoundPredicate(andPredicateWithSubpredicates: andPredicatesArray)
+            
+            if orPredicatesArray.count > 0 {
+                let compounD = NSCompoundPredicate(orPredicateWithSubpredicates: orPredicatesArray)
+                fetchRequest.predicate = NSCompoundPredicate(andPredicateWithSubpredicates: [compounD, compoundP])
+                
+            } else {
+                fetchRequest.predicate = compoundP
+  
+            }
+            
+
+            if isFilteringSections{
+                cancelButton.isHidden = false
+                filterButton.isHidden = true
+            } else {
+                cancelButton.isHidden = true
+                filterButton.isHidden = false
+            }
+            
             fetchRequest.sortDescriptors = [sortDescriptor]
            
             // Edit the section name key path and cache name if appropriate.
@@ -180,9 +222,36 @@ class PeriodExpenses: UIViewController, NSFetchedResultsControllerDelegate, GADB
         // Dispose of any resources that can be recreated.
     }
     
+    // MARK: - IBActions
+    
+    @IBAction func filterButtonPressed(_ sender: Any){
+            let filtVC = storyboard?.instantiateViewController(withIdentifier: "FilterVC")
+            navigationController?.pushViewController(filtVC!, animated: true)
+        
+    }
+
     @IBAction func backButtonPressed(_ sender: Any) {
         navigationController?.popViewController(animated: true)
     }
+    
+    @IBAction func cancelButtonPressed(_ sender: Any){
+        andPredicatesArray = []
+        orPredicatesArray = []
+        
+        isFilteringSections = false
+        
+        try! fetchedResultsController.performFetch()
+        
+        let transition = CATransition()
+        transition.type = kCATransitionReveal
+        transition.subtype = kCAScrollBoth
+        transition.duration = 0.3
+        transition.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseInEaseOut)
+        transition.fillMode = kCAFillModeBackwards
+        self.tableView.layer.add(transition, forKey: "UITableViewReloadDataAnimationKey")
+        self.tableView.reloadData()
+    }
+    
 }
 
 extension PeriodExpenses : UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate {
@@ -212,7 +281,6 @@ extension PeriodExpenses : UITableViewDelegate, UITableViewDataSource, UISearchB
         if isFiltering() {
             return filteredItems.count
         }
-        
         return fetchedResultsController.sections![section].numberOfObjects
     }
     
@@ -246,7 +314,7 @@ extension PeriodExpenses : UITableViewDelegate, UITableViewDataSource, UISearchB
         }
         
         cell.configureCell(budget: budget)
-        cell.selectionStyle = .none
+        
         
         return cell
     }
@@ -259,11 +327,28 @@ extension PeriodExpenses : UITableViewDelegate, UITableViewDataSource, UISearchB
             }
             return 1
         }
+        
+        if (fetchedResultsController.sections?.count)! == 0 {
+            noResultsFoundLabel.isHidden = false
+        } else {
+            noResultsFoundLabel.isHidden = true
+        }
+        
         return (fetchedResultsController.sections?.count)!
     }
 
     func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
         return true
+    }
+    
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+        let object = fetchedResultsController.object(at: indexPath)
+        
+        showDetailedExpense(object: object)
+        
+        tableView.deselectRow(at: indexPath, animated: true)
     }
 
 }

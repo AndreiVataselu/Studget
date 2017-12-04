@@ -28,6 +28,8 @@ fileprivate func > <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
     }
 }
 
+var isCellSelected : [Bool] = []
+
 class SelectCategoryVC: UIViewController {
     var panGestureRecognizer: UIPanGestureRecognizer!
     var percentDrivenInteractiveTransition: UIPercentDrivenInteractiveTransition!
@@ -50,10 +52,26 @@ class SelectCategoryVC: UIViewController {
         fetchCoreDataObject()
         
         addCategoryButton.isHidden = true
+        
+        prepareCellSelected()
+    }
+    
+    func prepareCellSelected() {
+        
+        if isCellSelected.count == 0 {
+            for _ in 0..<userCategories.count {
+                isCellSelected.append(false)
+            }
+        } else {
+            for _ in isCellSelected.count..<userCategories.count {
+                isCellSelected.append(false)
+            }
+        }
     }
     
     override func viewDidAppear(_ animated: Bool) {
         fetchCoreDataObject()
+        prepareCellSelected()
     }
     
     func fetchCoreDataObject() {
@@ -62,6 +80,7 @@ class SelectCategoryVC: UIViewController {
                 if userCategories.count == 0 {
                     tableView.isHidden = true
                 } else {
+                    userCategories.reverse()
                     tableView.reloadData()
                     tableView.isHidden = false
                 }
@@ -166,10 +185,40 @@ extension SelectCategoryVC : UITableViewDelegate, UITableViewDataSource {
         let cell = tableView.dequeueReusableCell(withIdentifier: "CategoryCell") as! CategoryCell
         
         cell.configureCell(title: userCategories[indexPath.row].categoryName!)
+        if isCellSelected[indexPath.row] {
+            cell.accessoryType = UITableViewCellAccessoryType.checkmark
+        }
         
         return cell
     }
     
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
     
-    
+        if isCellSelected[indexPath.row]{
+            isCellSelected[indexPath.row] = false
+        } else {
+            
+            for i in 0..<isCellSelected.count {
+                if isCellSelected[i] && i != indexPath.row {
+                    isCellSelected[i] = false
+                    
+                    let cell = tableView.cellForRow(at: IndexPath(row: i, section: 0))
+                    cell?.accessoryType = UITableViewCellAccessoryType.none
+                }
+            }
+            isCellSelected[indexPath.row] = true
+
+        }
+        
+        let cell = tableView.cellForRow(at: indexPath)
+        
+        if isCellSelected[indexPath.row] {
+            cell?.accessoryType = UITableViewCellAccessoryType.checkmark
+        } else {
+            cell?.accessoryType = UITableViewCellAccessoryType.none
+        }
+        
+        tableView.deselectRow(at: indexPath, animated: true)
+        navigationController?.popViewController(animated: true)
+    }
 }
